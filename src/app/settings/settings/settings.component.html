@@ -1,0 +1,22 @@
+<div class="main-content">
+  <div class="page-title dark-background d-flex px-3">
+    <div
+      class="container-fluid d-lg-flex justify-content-between align-items-center"
+    >
+      <h1 class="mb-2 mb-lg-0">Settings</h1>
+    </div>
+    <div>
+      <button class="btn btn-outline-light px-4" (click)="previewWebsite()">
+        Preview
+      </button>
+    </div>
+  </div>
+  <div class="d-flex gap-2 content-wrap">
+    <div class="sideMenue">
+      <app-menue [activeTab]="currentActiveTab"></app-menue>
+    </div>
+    <div class="screen">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

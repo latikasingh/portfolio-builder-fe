@@ -1,0 +1,21 @@
+@if (userLoading$ | async) {
+  <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+    <app-spinner></app-spinner>
+  </div>
+} @else {
+  <div class="main-wrap" [@fadeInOnEnter]>
+    <div class="header-wrap">
+      <app-header (selectedTabOption)="scrollToSection($event)"></app-header>
+    </div>
+    <div class="main-wrap">
+      <app-hero></app-hero>
+      <app-about></app-about>
+      <app-skills></app-skills>
+      <app-resume></app-resume>
+      <app-portfolio></app-portfolio>
+      <app-services></app-services>
+      <app-contact></app-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+}

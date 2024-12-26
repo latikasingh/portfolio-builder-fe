@@ -1,0 +1,39 @@
+.sidebar {
+  height: 100%;
+  background-color: #040b14;
+  min-width: 250px;
+  max-width: 250px;
+  transition: all 0.3s;
+  height: 100%;
+
+  &.active {
+    margin-left: 0;
+  }
+
+  @media (max-width: 767px) {
+    margin-left: -250px;
+    position: absolute;
+    min-height: 100%;
+    z-index: 1;
+  }
+
+  .menu-wrap {
+    list-style-type: none;
+    .list-item {
+      cursor: pointer;
+      &.active {
+        background: #eee;
+        border-radius: 8px;
+
+        .item,
+        .item:hover {
+          color: #000;
+        }
+      }
+
+      .item {
+        color: #fff;
+      }
+    }
+  }
+}

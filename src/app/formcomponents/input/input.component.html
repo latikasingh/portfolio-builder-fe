@@ -1,0 +1,19 @@
+<div>
+  @if (control) {
+    <input
+      [class]="classList"
+      [type]="type"
+      [placeholder]="placeholder"
+      [formControl]="control"
+    />
+  } @else {
+    <input [class]="classList" [type]="type" [placeholder]="placeholder" />
+  }
+  <div class="text-danger">
+    @for (error of errors; track $index) {
+      @if (control.touched && control.hasError(error.name)) {
+        {{ error.message }}
+      }
+    }
+  </div>
+</div>

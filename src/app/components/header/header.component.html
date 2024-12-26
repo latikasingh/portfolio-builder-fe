@@ -1,0 +1,63 @@
+<header id="header" class="header dark-background d-flex flex-column">
+  <div class="icon-wrap" (click)="redirectToSettings()">
+    <app-icons iconName="settings" width="30px" height="30px"></app-icons>
+  </div>
+  <i class="header-toggle d-xl-none bi bi-list"></i>
+
+  <div class="profile-img">
+    <img
+      src="assets/img/my-profile-img.jpg"
+      alt=""
+      class="img-fluid rounded-circle"
+    />
+  </div>
+
+  <div class="logo d-flex align-items-center justify-content-center">
+    <h1 class="sitename">
+      {{ (user$ | async).firstName + ' ' + (user$ | async).lastName }}
+    </h1>
+  </div>
+
+  <div
+    class="social-links d-flex align-items-center justify-content-center gap-2"
+  >
+    <div class="social-icon twitter"><i class="bi bi-twitter-x"></i></div>
+    <div class="social-icon facebook"><i class="bi bi-facebook"></i></div>
+    <div class="social-icon instagram"><i class="bi bi-instagram"></i></div>
+    <div class="social-icon google-plus"><i class="bi bi-skype"></i></div>
+    <div class="social-icon linkedin"><i class="bi bi-linkedin"></i></div>
+  </div>
+
+  <nav id="navmenu" class="navmenu">
+    <ul>
+      <li (click)="onSelectSection('home')">
+        <div class="list-item active">
+          <i class="bi bi-house navicon"></i>Home
+        </div>
+      </li>
+      <li (click)="onSelectSection('about')">
+        <div class="list-item"><i class="bi bi-person navicon"></i> About</div>
+      </li>
+      <li (click)="onSelectSection('resume')">
+        <div class="list-item">
+          <i class="bi bi-file-earmark-text navicon"></i> Resume
+        </div>
+      </li>
+      <li (click)="onSelectSection('portfolio')">
+        <div class="list-item">
+          <i class="bi bi-images navicon"></i> Portfolio
+        </div>
+      </li>
+      <li (click)="onSelectSection('services')">
+        <div class="list-item">
+          <i class="bi bi-hdd-stack navicon"></i> Services
+        </div>
+      </li>
+      <li (click)="onSelectSection('contact')">
+        <div class="list-item">
+          <i class="bi bi-envelope navicon"></i> Contact
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,27 @@
+<div class="sidebar d-flex flex-column justify-content-between py-4">
+  <ul class="d-flex flex-column px-2 gap-4 menu-wrap">
+    @for (option of menuOptions; track $index) {
+      <li
+        class="p-2 list-item"
+        [class.active]="activeTab === option.option"
+        (click)="navigateScreen(option.option)"
+      >
+        <div
+          class="item text-decoration-none d-flex align-items-center gap-3 w-100"
+        >
+          <app-icons
+            [iconName]="option.icon"
+            [color]="activeTab === option.option ? '#000' : '#ffffff'"
+            width="20px"
+            height="20px"
+          />
+          {{ option.option | titlecase }}
+        </div>
+      </li>
+    }
+  </ul>
+
+  <div class="p-3">
+    <button (click)="onLogout()" class="btn btn-danger w-100">Logout</button>
+  </div>
+</div>

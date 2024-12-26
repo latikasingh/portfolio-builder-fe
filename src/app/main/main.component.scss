@@ -1,0 +1,13 @@
+.main-wrap {
+  display: flex;
+  flex: 1;
+  .header-wrap {
+  }
+
+  .main-wrap {
+    width: 100%;
+    margin-left: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+}
