@@ -1,37 +1,55 @@
-<div class="content">
-  <h2>Welcome, Greg</h2>
-
-  <div class="profile-img">
-    <img class="img" src="/assets/img/admin.png" alt="user" />
+@if (loading$ | async) {
+  <div class="d-flex align-items-center justify-content-center h-100 w-100">
+    <app-spinner />
   </div>
+} @else {
+  <div class="content">
+    <h2>
+      Welcome,
+      {{ (authUser$ | async).firstName + ' ' + (authUser$ | async).lastName }}
+    </h2>
 
-  <div class="userForm">
-    <div class="d-flex gap-5">
-      <div class="control-wrap">
-        <label class="label">Firstname</label>
-        <app-input [placeholder]="'Firstname'" />
-      </div>
-
-      <div class="control-wrap">
-        <label class="label">Lastname</label>
-        <app-input [placeholder]="'Lastname'" />
-      </div>
+    <div class="profile-img">
+      <img class="img" src="/assets/img/admin.png" alt="user" />
     </div>
 
-    <div class="d-flex gap-5">
-      <div class="control-wrap">
-        <label class="label">Email</label>
-        <app-input [placeholder]="'Email'" />
-      </div>
-
-      <div class="control-wrap">
-        <label class="label">Add Tags</label>
-        <div class="d-flex align-items-center gap-4 input-wrap">
-          <app-input [placeholder]="'Tags'" />
-          <button class="btn btn-dark">Add Tag</button>
+    <div class="userForm">
+      <div class="d-flex gap-5">
+        <div class="control-wrap">
+          <label class="label">Firstname</label>
+          <app-input [placeholder]="'Firstname'" />
         </div>
-        <div>test</div>
+
+        <div class="control-wrap">
+          <label class="label">Lastname</label>
+          <app-input [placeholder]="'Lastname'" />
+        </div>
+      </div>
+
+      <div class="d-flex gap-5">
+        <div class="control-wrap">
+          <label class="label">Email</label>
+          <app-input [placeholder]="'Email'" />
+        </div>
+
+        <div class="control-wrap">
+          <label class="label">Add Tags</label>
+          <div class="d-flex align-items-center gap-4 input-wrap">
+            <app-input [placeholder]="'Tags'" />
+            <button class="btn btn-dark">Add Tag</button>
+          </div>
+          <div class="d-flex gap-3">
+            @for (tag of tags; track $index) {
+              <span class="chip"
+                >{{ tag }}
+                <span class="cross-icon" (click)="onRemoveTag($index)">
+                  <app-icons iconName="cross" width="10px" height="10px" />
+                </span>
+              </span>
+            }
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+}

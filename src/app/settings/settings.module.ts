@@ -13,6 +13,7 @@ import { ResumeComponent } from './resume/resume.component';
 import { ServiceComponent } from './service/service.component';
 import { SkillsComponent } from './skills/skills.component';
 import { InputComponent } from '../formcomponents/input/input.component';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { InputComponent } from '../formcomponents/input/input.component';
     SettingsRoutingModule,
     IconsComponent,
     InputComponent,
+    SpinnerComponent,
   ],
   exports: [RouterModule],
 })
