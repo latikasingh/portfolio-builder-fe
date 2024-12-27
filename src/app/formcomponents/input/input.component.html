@@ -7,7 +7,12 @@
       [formControl]="control"
     />
   } @else {
-    <input [class]="classList" [type]="type" [placeholder]="placeholder" />
+    <input
+      [class]="classList"
+      [type]="type"
+      [placeholder]="placeholder"
+      [(ngModel)]="value"
+    />
   }
   <div class="text-danger">
     @for (error of errors; track $index) {

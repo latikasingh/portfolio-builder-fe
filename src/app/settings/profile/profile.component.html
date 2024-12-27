@@ -13,30 +13,50 @@
       <img class="img" src="/assets/img/admin.png" alt="user" />
     </div>
 
-    <div class="userForm">
+    <h3>Profile</h3>
+    <div class="userForm" [formGroup]="userForm">
       <div class="d-flex gap-5">
         <div class="control-wrap">
           <label class="label">Firstname</label>
-          <app-input [placeholder]="'Firstname'" />
+          <app-input
+            [control]="$any(userForm.get('firstName'))"
+            [placeholder]="'Firstname'"
+            [errors]="[{ name: 'required', message: 'firstName are required' }]"
+          />
         </div>
 
         <div class="control-wrap">
           <label class="label">Lastname</label>
-          <app-input [placeholder]="'Lastname'" />
+          <app-input
+            [control]="$any(userForm.get('lastName'))"
+            [placeholder]="'Lastname'"
+            [errors]="[{ name: 'required', message: 'lastName are required' }]"
+          />
         </div>
       </div>
 
       <div class="d-flex gap-5">
         <div class="control-wrap">
           <label class="label">Email</label>
-          <app-input [placeholder]="'Email'" />
+          <app-input
+            [control]="$any(userForm.get('email'))"
+            [placeholder]="'Email'"
+            [errors]="[
+              { name: 'required', message: 'email are required' },
+              { name: 'email', message: 'Enter a valid email' },
+            ]"
+          />
         </div>
 
         <div class="control-wrap">
-          <label class="label">Add Tags</label>
+          <label class="label">Add tags</label>
           <div class="d-flex align-items-center gap-4 input-wrap">
-            <app-input [placeholder]="'Tags'" />
-            <button class="btn btn-dark">Add Tag</button>
+            <app-input
+              [control]="$any(userForm.get('tagInput'))"
+              [placeholder]="'Tags'"
+              [errors]="[{ name: 'required', message: 'tags are required' }]"
+            />
+            <button class="btn btn-dark" (click)="onAddTag()">Add Tag</button>
           </div>
           <div class="d-flex gap-3">
             @for (tag of tags; track $index) {
@@ -49,6 +69,59 @@
             }
           </div>
         </div>
+      </div>
+
+      <div class="row">
+        @for (control of socialMediaControls; track $index) {
+          <div class="d-flex gap-5 mt-2 social-media-wrap col-6">
+            <div class="input-group mb-3 social-media-control">
+              <span class="input-group-text my-2 bg-dark" id="basic-addon1">
+                <i [class]="control.get('icon').value + ' text-white'"></i>
+              </span>
+              <app-input
+                [placeholder]="control.get('name').value + ' link'"
+                [control]="$any(control.get('link'))"
+              />
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="cover-img-wrap row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Cover image*</label>
+            <input
+              class="form-control"
+              #attachments
+              type="file"
+              id="formFile"
+              (change)="onFileChanged($event)"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            @if (listOfFiles.length) {
+              <img
+                [src]="listOfFiles[0]"
+                class="rounded mb-3"
+                width="150px"
+                height="150px"
+              />
+            }
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button
+          class="btn btn-dark px-5"
+          [disabled]="userForm.invalid"
+          (click)="onSubmit()"
+        >
+          Submit
+        </button>
       </div>
     </div>
   </div>

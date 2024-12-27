@@ -14,6 +14,7 @@ import { ServiceComponent } from './service/service.component';
 import { SkillsComponent } from './skills/skills.component';
 import { InputComponent } from '../formcomponents/input/input.component';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import { SpinnerComponent } from '../components/spinner/spinner.component';
     IconsComponent,
     InputComponent,
     SpinnerComponent,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [RouterModule],
 })

@@ -21,6 +21,13 @@
     }
   }
   .userForm {
+    .social-media-wrap {
+      .social-media-control {
+        app-input {
+          flex: 1;
+        }
+      }
+    }
     .control-wrap {
       width: 100%;
       .input-wrap {
