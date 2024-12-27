@@ -5,6 +5,7 @@
       [type]="type"
       [placeholder]="placeholder"
       [formControl]="control"
+      [readOnly]="isReadOnly"
     />
   } @else {
     <input
@@ -12,6 +13,7 @@
       [type]="type"
       [placeholder]="placeholder"
       [(ngModel)]="value"
+      [readOnly]="isReadOnly"
     />
   }
   <div class="text-danger">

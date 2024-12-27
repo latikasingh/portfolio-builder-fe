@@ -26,6 +26,10 @@ export class AuthService {
     return this.http.get<{ user: IUser }>('/user');
   }
 
+  updateUser(user: IUser, id: string) {
+    return this.http.patch<{ user: IUser }>(`/user/${id}`, { ...user });
+  }
+
   signup(payload: ISignupDto) {
     return this.http.post<IAuthRes>('/user/signup', payload);
   }

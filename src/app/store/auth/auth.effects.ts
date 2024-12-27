@@ -16,6 +16,9 @@ import {
   signup,
   signupError,
   signupSuccess,
+  updateUser,
+  updateUserError,
+  updateUserSuccess,
 } from './auth.action';
 import { AlertService } from '../../services/alert.service';
 import { Router } from '@angular/router';
@@ -92,6 +95,31 @@ export class AuthEffects {
 
             return of(
               getUserError({
+                error: { message: error.message, statusCode: error.status },
+              }),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateUser),
+      exhaustMap((props) =>
+        this.authService.updateUser(props.user, props.id).pipe(
+          map((response) => {
+            this.alertService.displaySuccessToasts(
+              'Profile data updated successfully',
+            );
+            return updateUserSuccess({ user: response.user });
+          }),
+          catchError((error) => {
+            this.alertService.displayErrorToasts(error.error.message);
+
+            return of(
+              updateUserError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );

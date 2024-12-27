@@ -54,6 +54,22 @@ export const getUserSuccess = createAction(
 );
 
 export const getUserError = createAction(
-  '[Auth] GetUserErrorError',
+  '[Auth] GetUserError',
+  props<{ error: IError }>(),
+);
+
+// Update User
+export const updateUser = createAction(
+  '[Auth] UpdateUser',
+  props<{ user: IUser; id: string }>(),
+);
+
+export const updateUserSuccess = createAction(
+  '[Auth] UpdateUserSuccess',
+  props<{ user: IUser }>(),
+);
+
+export const updateUserError = createAction(
+  '[Auth] UpdateUserError',
   props<{ error: IError }>(),
 );

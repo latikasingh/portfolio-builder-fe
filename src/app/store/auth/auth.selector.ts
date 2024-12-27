@@ -8,6 +8,11 @@ export const selectAuthLoading = createSelector(
   (state: IAuthState) => state.loading,
 );
 
+export const selectUpdateLoading = createSelector(
+  selectAuthState,
+  (state: IAuthState) => state.updateLoading,
+);
+
 export const selectAuthUserLoading = createSelector(
   selectAuthState,
   (state: IAuthState) => state.getUserLoading,

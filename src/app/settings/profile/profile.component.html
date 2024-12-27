@@ -10,7 +10,15 @@
     </h2>
 
     <div class="profile-img">
-      <img class="img" src="/assets/img/admin.png" alt="user" />
+      <label for="fileInput">
+        <img class="img" [src]="profileImage" alt="user" />
+      </label>
+      <input
+        type="file"
+        id="fileInput"
+        (change)="onProfileImageUpload($event)"
+        style="display: none"
+      />
     </div>
 
     <h3>Profile</h3>
@@ -39,17 +47,17 @@
         <div class="control-wrap">
           <label class="label">Email</label>
           <app-input
-            [control]="$any(userForm.get('email'))"
+            [value]="(authUser$ | async).email"
             [placeholder]="'Email'"
-            [errors]="[
-              { name: 'required', message: 'email are required' },
-              { name: 'email', message: 'Enter a valid email' },
-            ]"
+            [isReadOnly]="true"
           />
         </div>
 
         <div class="control-wrap">
-          <label class="label">Add tags</label>
+          <label class="label"
+            >Tags
+            <span class="text-danger">(minimum 1 tag is required)</span></label
+          >
           <div class="d-flex align-items-center gap-4 input-wrap">
             <app-input
               [control]="$any(userForm.get('tagInput'))"
@@ -102,9 +110,9 @@
         </div>
         <div class="col-md-6">
           <div>
-            @if (listOfFiles.length) {
+            @if (userForm.get('coverImage').value) {
               <img
-                [src]="listOfFiles[0]"
+                [src]="userForm.get('coverImage').value"
                 class="rounded mb-3"
                 width="150px"
                 height="150px"
@@ -117,9 +125,17 @@
       <div>
         <button
           class="btn btn-dark px-5"
-          [disabled]="userForm.invalid"
+          [class.opacity-25]="
+            userForm.invalid || !userForm.touched || (updateLoading$ | async)
+          "
+          [disabled]="
+            userForm.invalid || !userForm.touched || (updateLoading$ | async)
+          "
           (click)="onSubmit()"
         >
+          @if (updateLoading$ | async) {
+            <app-spinner classList="spinner-border-sm"></app-spinner>
+          }
           Submit
         </button>
       </div>

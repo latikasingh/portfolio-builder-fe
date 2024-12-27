@@ -10,10 +10,11 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class InputComponent {
   @Input() type: string = 'text';
+  @Input() isReadOnly: boolean = false;
   @Input() placeholder: string = 'Input';
   @Input() classList: string = '';
   @Input() control!: FormControl;
   @Input() errors: { name: string; message: string }[] = [];
 
-  value: string = '';
+  @Input() value: string = '';
 }

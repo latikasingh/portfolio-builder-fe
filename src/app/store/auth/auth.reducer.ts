@@ -14,10 +14,14 @@ import {
   signup,
   signupError,
   signupSuccess,
+  updateUser,
+  updateUserError,
+  updateUserSuccess,
 } from './auth.action';
 
 export interface IAuthState {
   loading: boolean;
+  updateLoading: boolean;
   getUserLoading: boolean;
   user: IUser;
   error: IError;
@@ -25,6 +29,7 @@ export interface IAuthState {
 
 export const initialState: IAuthState = {
   loading: false,
+  updateLoading: false,
   getUserLoading: false,
   user: null,
   error: null,
@@ -66,6 +71,19 @@ export const authReducer = createReducer(
   on(logoutError, (state, { error }) => ({
     ...state,
     getUserLoading: false,
+    error,
+  })),
+
+  // Update user
+  on(updateUser, (state) => ({ ...state, updateLoading: true })),
+  on(updateUserSuccess, (state, { user }) => ({
+    ...state,
+    updateLoading: false,
+    user,
+  })),
+  on(updateUserError, (state, { error }) => ({
+    ...state,
+    updateLoading: false,
     error,
   })),
 );
