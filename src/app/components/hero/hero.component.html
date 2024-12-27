@@ -1,5 +1,5 @@
 <section id="home" class="hero section dark-background">
-  <img src="assets/img/hero-bg.jpg" alt="" class="" />
+  <img [src]="(user$ | async).coverImage" alt="" class="" />
   <div class="container">
     <h2>{{ (user$ | async).firstName + ' ' + (user$ | async).lastName }}</h2>
     <p>

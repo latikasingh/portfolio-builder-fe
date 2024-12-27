@@ -5,22 +5,28 @@ import {
   getWebsiteUserData,
   getWebsiteUserDataError,
   getWebsiteUserDataSuccess,
+  setUserId,
 } from './user.action';
 
 export interface IWebsiteUserState {
   loading: boolean;
   user: IUser;
   error: IError;
+  userId: string;
 }
 
 export const initialState: IWebsiteUserState = {
   loading: false,
   user: null,
   error: null,
+  userId: null,
 };
 
 export const websiteUserReducer = createReducer(
   initialState,
+
+  // Set user id
+  on(setUserId, (state, { id }) => ({ ...state, userId: id })),
 
   // Get website user data
   on(getWebsiteUserData, (state) => ({ ...state, loading: true })),

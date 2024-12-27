@@ -5,6 +5,11 @@ import { selectAuthUserLoading } from '../store/auth/auth.selector';
 import { CommonModule } from '@angular/common';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { MainModule } from '../components/main.module';
+import { ActivatedRoute } from '@angular/router';
+import {
+  getWebsiteUserData,
+  setUserId,
+} from '../store/website/user/user.action';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -14,12 +19,20 @@ import { MainModule } from '../components/main.module';
   animations: [fadeInOnEnterAnimation()],
 })
 export class MainComponent implements OnInit {
+  userId: string;
   userLoading$: Observable<boolean>;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
+    this.userId = this.route.snapshot.params['id'];
+    this.store.dispatch(setUserId({ id: this.userId }));
+
     this.userLoading$ = this.store.select(selectAuthUserLoading);
+    this.store.dispatch(getWebsiteUserData({ id: this.userId }));
   }
 
   scrollToSection(sectionId: string): void {

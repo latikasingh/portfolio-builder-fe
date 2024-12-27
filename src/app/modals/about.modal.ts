@@ -8,7 +8,7 @@ export interface IAboutDto {
   degree: string;
   phone: number;
   city: string;
-  freelancer: string;
+  freelancer: boolean;
 
   happyClient: number;
   projects: number;

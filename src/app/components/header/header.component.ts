@@ -2,8 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IUser } from '../../modals/user.modal';
-import { selectAuthUser } from '../../store/auth/auth.selector';
 import { Router } from '@angular/router';
+import { selectWebsiteUser } from '../../store/website/user/user.selector';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user$ = this.store.select(selectAuthUser);
+    this.user$ = this.store.select(selectWebsiteUser);
   }
 
   onSelectSection(tab: string) {
@@ -29,5 +29,12 @@ export class HeaderComponent implements OnInit {
 
   redirectToSettings() {
     this.router.navigate(['settings']);
+  }
+
+  goToLink(link: string) {
+    if (!link.startsWith('http://') && !link.startsWith('https://')) {
+      link = 'https://' + link;
+    }
+    window.open(link, '_blank');
   }
 }

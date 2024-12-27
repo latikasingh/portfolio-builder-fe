@@ -6,7 +6,7 @@
 
   <div class="profile-img">
     <img
-      src="assets/img/my-profile-img.jpg"
+      [src]="(user$ | async).profileImage"
       alt=""
       class="img-fluid rounded-circle"
     />
@@ -18,14 +18,22 @@
     </h1>
   </div>
 
-  <div
-    class="social-links d-flex align-items-center justify-content-center gap-2"
-  >
-    <div class="social-icon twitter"><i class="bi bi-twitter-x"></i></div>
-    <div class="social-icon facebook"><i class="bi bi-facebook"></i></div>
-    <div class="social-icon instagram"><i class="bi bi-instagram"></i></div>
-    <div class="social-icon linkedin"><i class="bi bi-linkedin"></i></div>
-  </div>
+  @if (((user$ | async).socialMedia ?? []).length) {
+    <div
+      class="social-links d-flex align-items-center justify-content-center gap-2"
+    >
+      @for (media of (user$ | async).socialMedia; track $index) {
+        @if (media.link) {
+          <div
+            (click)="goToLink(media.link)"
+            [class]="'social-icon ' + media.name.toLowerCase()"
+          >
+            <i [class]="media.icon"></i>
+          </div>
+        }
+      }
+    </div>
+  }
 
   <nav id="navmenu" class="navmenu">
     <ul>

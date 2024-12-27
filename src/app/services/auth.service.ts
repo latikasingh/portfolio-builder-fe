@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUser } from '../modals/user.modal';
 import { ISignupDto } from '../modals/auth.modal';
+import { jsonToFormData } from '../utls';
 
 export interface IAuthRes {
   user: IUser;
@@ -27,7 +28,9 @@ export class AuthService {
   }
 
   updateUser(user: IUser, id: string) {
-    return this.http.patch<{ user: IUser }>(`/user/${id}`, { ...user });
+    const formData = jsonToFormData(user);
+
+    return this.http.patch<{ user: IUser }>(`/user/${id}`, formData);
   }
 
   signup(payload: ISignupDto) {

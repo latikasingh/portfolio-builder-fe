@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import Typed from 'typed.js';
 import { IUser } from '../../modals/user.modal';
-import { selectAuthUser } from '../../store/auth/auth.selector';
+import { selectWebsiteUser } from '../../store/website/user/user.selector';
 
 @Component({
   selector: 'app-hero',
@@ -12,13 +12,17 @@ import { selectAuthUser } from '../../store/auth/auth.selector';
 })
 export class HeroComponent implements OnInit {
   user$: Observable<IUser>;
-  texts: string[] = ['Designer', 'Developer', 'Freelancer', 'Photographer'];
+  texts: string[] = ['Designer', 'Developer'];
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.createTypingEffect();
-    this.user$ = this.store.select(selectAuthUser);
+    this.user$ = this.store.select(selectWebsiteUser);
+
+    this.user$.pipe(take(2)).subscribe((user) => {
+      this.texts = user.tags;
+      this.createTypingEffect();
+    });
   }
 
   createTypingEffect() {

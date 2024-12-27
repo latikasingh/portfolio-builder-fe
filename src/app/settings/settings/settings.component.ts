@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
-import { filter } from 'rxjs';
+import { Observable, take } from 'rxjs';
+import { IUser } from '../../modals/user.modal';
+import { Store } from '@ngrx/store';
+import { selectAuthUser } from '../../store/auth/auth.selector';
 
 @Component({
   selector: 'app-settings',
@@ -10,18 +13,29 @@ import { filter } from 'rxjs';
 })
 export class SettingsComponent implements OnInit {
   currentChildRoute: string;
+  authUser$: Observable<IUser>;
+  userId: string;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private store: Store,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authUser$ = this.store.select(selectAuthUser);
+    this.authUser$.pipe(take(2)).subscribe((user) => {
+      if (user) {
+        this.userId = user.id;
+      }
+    });
+  }
 
   get currentActiveTab() {
     return this.route.snapshot.firstChild.url[0].path.toString();
   }
 
   previewWebsite() {
-    window.open(environment.APP_URL + '/portfolio', '_blank');
+    window.open(`${environment.APP_URL}/portfolio/${this.userId}`, '_blank');
   }
 }

@@ -1,0 +1,9 @@
+.content {
+  .date-wrap {
+    app-datepicker {
+      ::ng-deep mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -112,7 +112,7 @@
           <div>
             @if (userForm.get('coverImage').value) {
               <img
-                [src]="userForm.get('coverImage').value"
+                [src]="coverImage"
                 class="rounded mb-3"
                 width="150px"
                 height="150px"
@@ -126,17 +126,17 @@
         <button
           class="btn btn-dark px-5"
           [class.opacity-25]="
-            userForm.invalid || !userForm.touched || (updateLoading$ | async)
+            userForm.invalid || !userForm.dirty || (updateLoading$ | async)
           "
           [disabled]="
-            userForm.invalid || !userForm.touched || (updateLoading$ | async)
+            userForm.invalid || !userForm.dirty || (updateLoading$ | async)
           "
-          (click)="onSubmit()"
+          (click)="onUpdate()"
         >
           @if (updateLoading$ | async) {
             <app-spinner classList="spinner-border-sm"></app-spinner>
           }
-          Submit
+          Update
         </button>
       </div>
     </div>

@@ -15,6 +15,9 @@ import { SkillsComponent } from './skills/skills.component';
 import { InputComponent } from '../formcomponents/input/input.component';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextareaComponent } from '../formcomponents/textarea/textarea.component';
+import { DatepickerComponent } from '../formcomponents/datepicker/datepicker.component';
+import { RadioComponent } from '../formcomponents/radio/radio.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SpinnerComponent,
     ReactiveFormsModule,
     FormsModule,
+    TextareaComponent,
+    DatepickerComponent,
+    RadioComponent,
   ],
   exports: [RouterModule],
 })

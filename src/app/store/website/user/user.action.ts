@@ -2,18 +2,24 @@ import { createAction, props } from '@ngrx/store';
 import { IUser } from '../../../modals/user.modal';
 import { IError } from '../../../modals/error.modal';
 
+//Set Userid
+export const setUserId = createAction(
+  '[Website] SetUserId',
+  props<{ id: string }>(),
+);
+
 // Get website user data
 export const getWebsiteUserData = createAction(
-  '[Auth] GetWebsiteUserData',
+  '[Website] GetWebsiteUserData',
   props<{ id: string }>(),
 );
 
 export const getWebsiteUserDataSuccess = createAction(
-  '[Auth] GetWebsiteUserDataSuccess',
+  '[Website] GetWebsiteUserDataSuccess',
   props<{ user: IUser }>(),
 );
 
 export const getWebsiteUserDataError = createAction(
-  '[Auth] GetWebsiteUserDataError',
+  '[Website] GetWebsiteUserDataError',
   props<{ error: IError }>(),
 );

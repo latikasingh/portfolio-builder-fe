@@ -3,8 +3,8 @@ export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  coverImage: string;
-  profileImage: string;
+  coverImage: any;
+  profileImage: any;
   socialMedia: ISocialMedia[];
   tags: string[];
 }

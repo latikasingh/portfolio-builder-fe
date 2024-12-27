@@ -1,0 +1,17 @@
+@if (control) {
+  <mat-radio-group [formControl]="control">
+    @for (option of radioOptions; track $index) {
+      <mat-radio-button [value]="option.value">{{
+        option.label
+      }}</mat-radio-button>
+    }
+  </mat-radio-group>
+} @else {
+  <mat-radio-group [(ngModel)]="value">
+    @for (option of radioOptions; track $index) {
+      <mat-radio-button [value]="option.value">{{
+        option.label
+      }}</mat-radio-button>
+    }
+  </mat-radio-group>
+}

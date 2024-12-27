@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })
-export class AboutComponent {}
+export class AboutComponent {
+  freelancerOption: { label: string; value: string | boolean }[] = [
+    { value: true, label: 'Yes' },
+    { value: false, label: 'No' },
+  ];
+}

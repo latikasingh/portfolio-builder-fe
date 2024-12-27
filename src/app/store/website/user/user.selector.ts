@@ -1,20 +1,20 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IWebsiteUserState } from './user.reducer';
 
-export const selectAuthState =
+export const selectWebsiteUserState =
   createFeatureSelector<IWebsiteUserState>('websiteUser');
 
-export const selectUserLoading = createSelector(
-  selectAuthState,
+export const selectWebsiteUserLoading = createSelector(
+  selectWebsiteUserState,
   (state: IWebsiteUserState) => state.loading,
 );
 
-export const selectUser = createSelector(
-  selectAuthState,
+export const selectWebsiteUser = createSelector(
+  selectWebsiteUserState,
   (state: IWebsiteUserState) => state.user,
 );
 
-export const selectUserError = createSelector(
-  selectAuthState,
+export const selectWebsiteUserError = createSelector(
+  selectWebsiteUserState,
   (state: IWebsiteUserState) => state.error,
 );

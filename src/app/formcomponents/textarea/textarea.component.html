@@ -1,0 +1,17 @@
+@if (control) {
+  <textarea
+    [class]="' ' + classList"
+    [formControl]="control"
+    name="textarea"
+    id="textarea"
+    >{{ value }}</textarea
+  >
+} @else {
+  <textarea
+    [class]="' ' + classList"
+    name="textarea"
+    id="textarea"
+    [(ngModel)]="value"
+    (ngModelChange)="onChange($event)"
+  ></textarea>
+}

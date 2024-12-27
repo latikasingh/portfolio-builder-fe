@@ -11,6 +11,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { IconsComponent } from '../common/icons/icons.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { IconsComponent } from '../common/icons/icons.component';
     ContactComponent,
     FooterComponent,
   ],
-  imports: [CommonModule, SpinnerComponent, IconsComponent],
+  imports: [CommonModule, SpinnerComponent, IconsComponent, RouterModule],
   exports: [
     HeaderComponent,
     HeroComponent,

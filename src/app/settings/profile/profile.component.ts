@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, take, filter } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { IUser } from '../../modals/user.modal';
 import {
   selectAuthUser,
@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
   fileList: File[] = [];
   listOfFiles: any[] = [];
   profileImage = '/assets/img/admin.png';
+  coverImage = '/assets/img/admin.png';
   editMode: boolean;
   userId: string;
 
@@ -81,6 +82,7 @@ export class ProfileComponent implements OnInit {
         this.userId = user.id;
         this.editMode = true;
         this.profileImage = user.profileImage;
+        this.coverImage = user.coverImage;
         this.userForm.patchValue({
           firstName: user.firstName,
           lastName: user.lastName,
@@ -119,7 +121,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onAddTag() {
-    this.userForm.markAllAsTouched();
+    this.userForm.markAsDirty();
     const tagInput = this.userForm.get('tagInput');
     const tagsArray = this.userForm.get('tags') as FormArray;
 
@@ -130,7 +132,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onRemoveTag(index: number) {
-    this.userForm.markAllAsTouched();
+    this.userForm.markAsDirty();
     const tagsArray = this.userForm.get('tags') as FormArray;
 
     if ((tagsArray ?? []).length) {
@@ -143,14 +145,14 @@ export class ProfileComponent implements OnInit {
   onFileChanged(event: any) {
     const files = event.target.files;
     const fileControl = this.userForm.get('coverImage') as FormControl;
-
+    this.userForm.markAsDirty();
     if (files?.length) {
       const fileArray = Array.from(files).map((file: any) => {
         const reader = new FileReader();
 
         reader.onload = (e: ProgressEvent<FileReader>) => {
           if (e.target?.result) {
-            this.listOfFiles.push(e.target.result as string);
+            this.coverImage = e.target.result as string;
           }
         };
 
@@ -158,11 +160,12 @@ export class ProfileComponent implements OnInit {
         return file;
       });
 
-      fileControl.setValue(fileArray);
+      fileControl.setValue(fileArray[0]);
     }
   }
 
   onProfileImageUpload(event: any) {
+    this.userForm.markAsDirty();
     const files = event.target.files;
     const fileControl = this.userForm.get('profileImage') as FormControl;
 
@@ -180,16 +183,23 @@ export class ProfileComponent implements OnInit {
         return file;
       });
 
-      fileControl.setValue(fileArray);
+      fileControl.setValue(fileArray[0]);
     }
   }
 
-  onSubmit() {
+  onUpdate() {
     const userData = { ...this.userForm.value };
     delete userData.tagInput;
+    console.log(userData);
 
     if (this.editMode) {
       this.store.dispatch(updateUser({ user: userData, id: this.userId }));
     }
+
+    this.updateLoading$.pipe(take(2)).subscribe((loading) => {
+      if (!loading) {
+        this.userForm.markAsPristine();
+      }
+    });
   }
 }
