@@ -1,6 +1,14 @@
 <mat-form-field>
   <mat-label>Choose a date</mat-label>
-  <input matInput [matDatepicker]="picker" />
+  <input matInput [matDatepicker]="picker" [formControl]="control" />
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
+
+<div class="text-danger">
+  @for (error of errors; track $index) {
+    @if (control.touched && control.hasError(error.name)) {
+      {{ error.message }}
+    }
+  }
+</div>

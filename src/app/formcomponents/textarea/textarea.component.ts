@@ -12,6 +12,7 @@ export class TextareaComponent {
   @Input() control: FormControl;
   @Input() classList: string;
   @Input() value: string;
+  @Input() errors: { name: string; message: string }[] = [];
 
   @Output() triggerChange = new EventEmitter<string>();
 

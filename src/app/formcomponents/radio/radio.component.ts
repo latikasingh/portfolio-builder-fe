@@ -13,4 +13,5 @@ export class RadioComponent {
   @Input() radioOptions: { value: string | boolean; label: string }[];
   @Input() control: FormControl;
   @Input() value: string;
+  @Input() errors: { name: string; message: string }[] = [];
 }

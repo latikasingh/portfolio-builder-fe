@@ -15,3 +15,11 @@
     (ngModelChange)="onChange($event)"
   ></textarea>
 }
+
+<div class="text-danger">
+  @for (error of errors; track $index) {
+    @if (control.touched && control.hasError(error.name)) {
+      {{ error.message }}
+    }
+  }
+</div>

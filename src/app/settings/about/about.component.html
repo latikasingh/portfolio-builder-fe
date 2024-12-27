@@ -1,84 +1,174 @@
-<h2>
-  <app-icons [iconName]="'about'" width="30px" height="30px" /> About settings
-</h2>
+@if (loading$ | async) {
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <app-spinner />
+  </div>
+} @else {
+  <h2>
+    <app-icons [iconName]="'about'" width="30px" height="30px" /> About settings
+  </h2>
 
-<div class="container-fluid content">
-  <div class="row">
-    <div class="col-6">
-      <label class="form-label fw-medium" for="">About description</label>
-      <app-textarea />
-    </div>
+  <div class="container-fluid content" [formGroup]="aboutForm">
+    <div class="row">
+      <div class="col-12">
+        <label class="form-label fw-medium" for="">Designation</label>
+        <app-input
+          [control]="$any(aboutForm.get('designation'))"
+          [type]="'text'"
+          placeholder="Designation"
+          [errors]="[{ name: 'required', message: 'Designation is required' }]"
+        />
+      </div>
 
-    <div class="col-6">
-      <label class="form-label fw-medium" for="">Designation description</label>
-      <app-textarea />
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label fw-medium" for="">About description</label>
+          <app-textarea
+            [errors]="[
+              { name: 'required', message: 'Description is required' },
+            ]"
+            [control]="$any(aboutForm.get('description'))"
+          />
+        </div>
+
+        <div class="col-6">
+          <label class="form-label fw-medium" for=""
+            >Designation description</label
+          >
+          <app-textarea
+            [errors]="[
+              {
+                name: 'required',
+                message: 'Designation description is required',
+              },
+            ]"
+            [control]="$any(aboutForm.get('designationDescription'))"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 d-flex flex-column date-wrap">
+          <label class="form-label fw-medium" for="">Date of birth</label>
+          <app-datepicker
+            [errors]="[
+              { name: 'required', message: 'Date of birth is required' },
+            ]"
+            [control]="$any(aboutForm.get('DOB'))"
+          />
+        </div>
+
+        <div class="col-4">
+          <label class="form-label fw-medium" for="">Age</label>
+          <app-input
+            [errors]="[{ name: 'required', message: 'Age is required' }]"
+            [control]="$any(aboutForm.get('age'))"
+            [type]="'number'"
+            placeholder="Age"
+          />
+        </div>
+
+        <div class="col-2 d-flex flex-column justify-content-center">
+          <label class="form-label fw-medium" for="">Freelancer</label>
+          <app-radio
+            [control]="$any(aboutForm.get('freelancer'))"
+            [radioOptions]="freelancerOption"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label fw-medium" for="">Website</label>
+          <app-input
+            [control]="$any(aboutForm.get('website'))"
+            [type]="'text'"
+            placeholder="Website"
+          />
+        </div>
+
+        <div class="col-6">
+          <label class="form-label fw-medium" for="">Degree</label>
+          <app-input
+            [errors]="[{ name: 'required', message: 'Degree is required' }]"
+            [control]="$any(aboutForm.get('degree'))"
+            [type]="'text'"
+            placeholder="Degree"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label fw-medium" for="">Phone</label>
+          <app-input
+            [errors]="[
+              { name: 'required', message: 'Phone is required' },
+              { name: 'pattern', message: 'Enter a valid phone number' },
+            ]"
+            [control]="$any(aboutForm.get('phone'))"
+            [type]="'number'"
+            placeholder="Phone"
+          />
+        </div>
+
+        <div class="col-6">
+          <label class="form-label fw-medium" for="">City</label>
+          <app-input
+            [errors]="[{ name: 'required', message: 'City is required' }]"
+            [control]="$any(aboutForm.get('city'))"
+            [type]="'text'"
+            placeholder="City"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <label class="form-label fw-medium" for="">Happy client</label>
+          <app-input
+            [control]="$any(aboutForm.get('happyClient'))"
+            [type]="'number'"
+            placeholder="Happy Clients"
+          />
+        </div>
+
+        <div class="col-3">
+          <label class="form-label fw-medium" for="">Projects</label>
+          <app-input
+            [control]="$any(aboutForm.get('projects'))"
+            [type]="'number'"
+            placeholder="Projects"
+          />
+        </div>
+
+        <div class="col-3">
+          <label class="form-label fw-medium" for="">Hours of supports</label>
+          <app-input
+            [control]="$any(aboutForm.get('hoursOfSupports'))"
+            [type]="'number'"
+            placeholder="Hours of supports"
+          />
+        </div>
+
+        <div class="col-3">
+          <label class="form-label fw-medium" for="">Team</label>
+          <app-input
+            [control]="$any(aboutForm.get('team'))"
+            [type]="'number'"
+            placeholder="Team"
+          />
+        </div>
+      </div>
+
+      <div class="py-2">
+        <button
+          class="btn btn-dark px-5"
+          (click)="onSubmit()"
+          [disabled]="aboutForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-6 d-flex flex-column date-wrap">
-      <label class="form-label fw-medium" for="">Date of birth</label>
-      <app-datepicker />
-    </div>
-
-    <div class="col-4">
-      <label class="form-label fw-medium" for="">Age</label>
-      <app-input [type]="'number'" placeholder="Age" />
-    </div>
-
-    <div class="col-2 d-flex flex-column justify-content-center">
-      <label class="form-label fw-medium" for="">Freelancer</label>
-      <app-radio [radioOptions]="freelancerOption" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-6">
-      <label class="form-label fw-medium" for="">Website</label>
-      <app-input [type]="'text'" placeholder="Website" />
-    </div>
-
-    <div class="col-6">
-      <label class="form-label fw-medium" for="">Degree</label>
-      <app-input [type]="'text'" placeholder="Degree" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-6">
-      <label class="form-label fw-medium" for="">Phone</label>
-      <app-input [type]="'number'" placeholder="Phone" />
-    </div>
-
-    <div class="col-6">
-      <label class="form-label fw-medium" for="">City</label>
-      <app-input [type]="'text'" placeholder="City" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-3">
-      <label class="form-label fw-medium" for="">Happy client</label>
-      <app-input [type]="'number'" placeholder="Happy Clients" />
-    </div>
-
-    <div class="col-3">
-      <label class="form-label fw-medium" for="">Projects</label>
-      <app-input [type]="'number'" placeholder="Projects" />
-    </div>
-
-    <div class="col-3">
-      <label class="form-label fw-medium" for="">Hours of supports</label>
-      <app-input [type]="'number'" placeholder="Hours of supports" />
-    </div>
-
-    <div class="col-3">
-      <label class="form-label fw-medium" for="">Team</label>
-      <app-input [type]="'number'" placeholder="Team" />
-    </div>
-  </div>
-
-  <div class="py-2">
-    <button class="btn btn-dark px-5">Submit</button>
-  </div>
-</div>
+}

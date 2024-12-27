@@ -1,5 +1,5 @@
-export interface IAboutDto {
-  userId: string;
+export interface IAbout {
+  designation: string;
   description: string;
   designationDescription: string;
   DOB: string;
@@ -14,4 +14,8 @@ export interface IAboutDto {
   projects: number;
   hoursOfSupports: number;
   team: number;
+}
+
+export interface IAboutDto extends IAbout {
+  user: string;
 }
