@@ -4,6 +4,9 @@ import { of } from 'rxjs';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { AlertService } from '../../../services/alert.service';
 import {
+  getWebsiteAboutData,
+  getWebsiteAboutDataError,
+  getWebsiteAboutDataSuccess,
   getWebsiteUserData,
   getWebsiteUserDataError,
   getWebsiteUserDataSuccess,
@@ -29,6 +32,28 @@ export class WebsiteUserEffects {
 
             return of(
               getWebsiteUserDataError({
+                error: { message: error.message, statusCode: error.status },
+              }),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
+  getWebsiteAboutData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getWebsiteAboutData),
+      exhaustMap((props) =>
+        this.websiteService.getUserAboutData(props.id).pipe(
+          map((response) => {
+            return getWebsiteAboutDataSuccess({ about: response });
+          }),
+          catchError((error) => {
+            this.alertService.displayErrorToasts(error.error.message);
+
+            return of(
+              getWebsiteAboutDataError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );

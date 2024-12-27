@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { IUser } from '../../../modals/user.modal';
 import { IError } from '../../../modals/error.modal';
+import { IAboutDto } from '../../../modals/about.modal';
 
 //Set Userid
 export const setUserId = createAction(
@@ -21,5 +22,21 @@ export const getWebsiteUserDataSuccess = createAction(
 
 export const getWebsiteUserDataError = createAction(
   '[Website] GetWebsiteUserDataError',
+  props<{ error: IError }>(),
+);
+
+// Get website about data
+export const getWebsiteAboutData = createAction(
+  '[Website] GetWebsiteAboutData',
+  props<{ id: string }>(),
+);
+
+export const getWebsiteAboutDataSuccess = createAction(
+  '[Website] GetWebsiteAboutDataSuccess',
+  props<{ about: IAboutDto }>(),
+);
+
+export const getWebsiteAboutDataError = createAction(
+  '[Website] GetWebsiteAboutDataError',
   props<{ error: IError }>(),
 );

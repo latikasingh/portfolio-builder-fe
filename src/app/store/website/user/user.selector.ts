@@ -4,7 +4,7 @@ import { IWebsiteUserState } from './user.reducer';
 export const selectWebsiteUserState =
   createFeatureSelector<IWebsiteUserState>('websiteUser');
 
-export const selectWebsiteUserLoading = createSelector(
+export const selectWebsiteLoading = createSelector(
   selectWebsiteUserState,
   (state: IWebsiteUserState) => state.loading,
 );
@@ -14,7 +14,12 @@ export const selectWebsiteUser = createSelector(
   (state: IWebsiteUserState) => state.user,
 );
 
-export const selectWebsiteUserError = createSelector(
+export const selectWebsiteError = createSelector(
   selectWebsiteUserState,
   (state: IWebsiteUserState) => state.error,
+);
+
+export const selectWebsiteAboutData = createSelector(
+  selectWebsiteUserState,
+  (state: IWebsiteUserState) => state.about,
 );

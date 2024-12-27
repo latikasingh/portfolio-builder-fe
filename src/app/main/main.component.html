@@ -1,4 +1,4 @@
-@if (userLoading$ | async) {
+@if ((userLoading$ | async) || (websiteLoading$ | async)) {
   <div class="w-100 h-100 d-flex align-items-center justify-content-center">
     <app-spinner></app-spinner>
   </div>

@@ -2,15 +2,20 @@ import { createReducer, on } from '@ngrx/store';
 import { IUser } from '../../../modals/user.modal';
 import { IError } from '../../../modals/error.modal';
 import {
+  getWebsiteAboutData,
+  getWebsiteAboutDataError,
+  getWebsiteAboutDataSuccess,
   getWebsiteUserData,
   getWebsiteUserDataError,
   getWebsiteUserDataSuccess,
   setUserId,
 } from './user.action';
+import { IAboutDto } from '../../../modals/about.modal';
 
 export interface IWebsiteUserState {
   loading: boolean;
   user: IUser;
+  about: IAboutDto;
   error: IError;
   userId: string;
 }
@@ -18,6 +23,7 @@ export interface IWebsiteUserState {
 export const initialState: IWebsiteUserState = {
   loading: false,
   user: null,
+  about: null,
   error: null,
   userId: null,
 };
@@ -36,6 +42,19 @@ export const websiteUserReducer = createReducer(
     user,
   })),
   on(getWebsiteUserDataError, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  // Get website about data
+  on(getWebsiteAboutData, (state) => ({ ...state, loading: true })),
+  on(getWebsiteAboutDataSuccess, (state, { about }) => ({
+    ...state,
+    loading: false,
+    about,
+  })),
+  on(getWebsiteAboutDataError, (state, { error }) => ({
     ...state,
     loading: false,
     error,
