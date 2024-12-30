@@ -7,6 +7,10 @@ import {
 import { aboutUserReducer, IAboutUserState } from './about/about.reducer';
 import { ISkillsState, skillsReducer } from './skills/skills.reducer';
 import { IResumeState, resumeReducer } from './resume/resume.reducer';
+import {
+  IPortfolioState,
+  portfolioReducer,
+} from './portfolio/portfolio.reducer';
 
 export interface AppState {
   auth: IAuthState;
@@ -14,6 +18,7 @@ export interface AppState {
   about: IAboutUserState;
   skills: ISkillsState;
   resume: IResumeState;
+  portfolio: IPortfolioState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -22,4 +27,5 @@ export const appReducers: ActionReducerMap<AppState> = {
   about: aboutUserReducer,
   skills: skillsReducer,
   resume: resumeReducer,
+  portfolio: portfolioReducer,
 };

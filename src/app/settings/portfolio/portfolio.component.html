@@ -1,1 +1,86 @@
-<p>portfolio works!</p>
+<div class="content" [formGroup]="portfolioForm">
+  <div class="fs-4">Portfolio details</div>
+
+  <div class="row mt-2">
+    <div class="col-4">
+      <label class="form-label" for="">Select type</label>
+      <app-select
+        [options]="options"
+        [control]="$any(portfolioForm.get('type'))"
+      />
+    </div>
+
+    <div class="col-4">
+      <label class="form-label" for="">Name</label>
+      <app-input
+        [placeholder]="'Name'"
+        [control]="$any(portfolioForm.get('name'))"
+      />
+    </div>
+
+    <div class="col-4">
+      <label class="form-label" for="">Description title</label>
+      <app-input
+        [placeholder]="'Description title'"
+        [control]="$any(portfolioForm.get('descriptionTitle'))"
+      />
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <label class="form-label" for="">Description</label>
+    <app-textarea
+      [placeholder]="'Description'"
+      [control]="$any(portfolioForm.get('type'))"
+    ></app-textarea>
+  </div>
+
+  <div class="row">
+    <label
+      class="drag-zone"
+      [appDragDrop]="true"
+      (dropped)="handleFileDrop($event)"
+    >
+      <input
+        type="file"
+        [multiple]="true"
+        (change)="addFiles(fileInput.files)"
+        #fileInput
+        class="visually-hidden"
+      />
+      Drag and Drop Files here
+    </label>
+  </div>
+
+  <div class="preview-container">
+    <div *ngFor="let fileData of files; index as i" class="file-preview">
+      <div class="file-info">
+        <img
+          *ngIf="fileData.previewUrl"
+          [src]="fileData.previewUrl"
+          alt="Preview"
+          class="file-thumbnail"
+        />
+        <div class="file-details">
+          <strong>{{ fileData.file.name }}</strong>
+          <span>{{ (fileData.file.size / 1024).toFixed(2) }} KB</span>
+        </div>
+      </div>
+      <button class="remove-btn" (click)="removeFile(i)">Remove</button>
+    </div>
+  </div>
+
+  <div>
+    <label class="form-label" for="">Link</label>
+    <app-input
+      [placeholder]="'Link'"
+      [control]="$any(portfolioForm.get('link'))"
+    />
+  </div>
+  <div class="mt-2">
+    <button class="btn btn-dark" (click)="onSubmit()">
+      <!-- [disabled]="portfolioForm.invalid || !portfolioForm.dirty" -->
+      Add details
+    </button>
+  </div>
+</div>

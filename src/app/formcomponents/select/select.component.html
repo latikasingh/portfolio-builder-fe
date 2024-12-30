@@ -1,0 +1,23 @@
+@if (control) {
+  <select class="form-select" [formControl]="control">
+    <option value="">{{ placeholder }}</option>
+    @for (option of options; track $index) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+} @else {
+  <select class="form-select" [ngModel]="value">
+    <option value="">{{ placeholder }}</option>
+    @for (option of options; track $index) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+}
+
+<div class="text-danger">
+  @for (error of errors; track $index) {
+    @if (control.touched && control.hasError(error.name)) {
+      {{ error.message }}
+    }
+  }
+</div>

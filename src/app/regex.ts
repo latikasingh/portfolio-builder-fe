@@ -4,3 +4,6 @@ export const passwordRegex =
 export const phoneRegex = /^\d{10}$/;
 
 export const percentageRegex = /^(100|[1-9][0-9]?)$/;
+
+export const linkRegex =
+  /^(https?:\/\/)?([\w\-]+(\.[\w\-]+)+)(:\d+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;

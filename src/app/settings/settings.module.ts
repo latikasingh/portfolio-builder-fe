@@ -19,6 +19,8 @@ import { TextareaComponent } from '../formcomponents/textarea/textarea.component
 import { DatepickerComponent } from '../formcomponents/datepicker/datepicker.component';
 import { RadioComponent } from '../formcomponents/radio/radio.component';
 import { ModalComponent } from '../formcomponents/modal/modal.component';
+import { SelectComponent } from '../formcomponents/select/select.component';
+import { DragDropDirective } from '../directives/drag-drop.directive';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { ModalComponent } from '../formcomponents/modal/modal.component';
     DatepickerComponent,
     RadioComponent,
     ModalComponent,
+    SelectComponent,
+    DragDropDirective,
   ],
   exports: [RouterModule],
 })

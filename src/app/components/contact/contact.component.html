@@ -53,7 +53,7 @@
       </div>
 
       <div class="col-lg-7">
-        <form action="forms/contact.php" method="post" class="php-email-form">
+        <form class="php-email-form" [formGroup]="contactForm">
           <div class="row gy-4">
             <div class="col-md-6">
               <label for="name-field" class="pb-2">Your Name</label>
@@ -62,7 +62,7 @@
                 name="name"
                 id="name-field"
                 class="form-control"
-                required=""
+                formControlName="name"
               />
             </div>
 
@@ -73,7 +73,7 @@
                 class="form-control"
                 name="email"
                 id="email-field"
-                required=""
+                formControlName="email"
               />
             </div>
 
@@ -84,7 +84,7 @@
                 class="form-control"
                 name="subject"
                 id="subject-field"
-                required=""
+                formControlName="subject"
               />
             </div>
 
@@ -95,16 +95,18 @@
                 name="message"
                 rows="10"
                 id="message-field"
-                required=""
+                formControlName="message"
               ></textarea>
             </div>
 
             <div class="col-md-12 text-center">
-              <!-- <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-   -->
-              <button type="submit">Send Message</button>
+              <button
+                [disabled]="contactForm.invalid"
+                (click)="sendMessage()"
+                type="submit"
+              >
+                Send Message
+              </button>
             </div>
           </div>
         </form>

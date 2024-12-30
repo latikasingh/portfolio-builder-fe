@@ -13,6 +13,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { IconsComponent } from '../common/icons/icons.component';
 import { RouterModule } from '@angular/router';
 import { CountUpDirective } from '../directives/count.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,13 @@ import { CountUpDirective } from '../directives/count.directive';
     FooterComponent,
     CountUpDirective,
   ],
-  imports: [CommonModule, SpinnerComponent, IconsComponent, RouterModule],
+  imports: [
+    CommonModule,
+    SpinnerComponent,
+    IconsComponent,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     HeaderComponent,
     HeroComponent,
