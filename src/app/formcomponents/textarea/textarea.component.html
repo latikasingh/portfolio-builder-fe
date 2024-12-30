@@ -1,5 +1,6 @@
 @if (control) {
   <textarea
+    [placeholder]="placeholder"
     [class]="' ' + classList"
     [formControl]="control"
     name="textarea"
@@ -8,6 +9,7 @@
   >
 } @else {
   <textarea
+    [placeholder]="placeholder"
     [class]="' ' + classList"
     name="textarea"
     id="textarea"

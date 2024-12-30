@@ -1,0 +1,16 @@
+@if (isOpen) {
+  <div class="custom-dialog-backdrop" (click)="closeDialog()"></div>
+
+  <div class="custom-dialog">
+    <div class="custom-dialog-header">
+      <ng-content select="[header]"></ng-content>
+      <button class="close-button" (click)="closeDialog()">X</button>
+    </div>
+    <div class="custom-dialog-content">
+      <ng-content select="[body]"></ng-content>
+    </div>
+    <div class="custom-dialog-actions">
+      <ng-content select="[actions]"></ng-content>
+    </div>
+  </div>
+}

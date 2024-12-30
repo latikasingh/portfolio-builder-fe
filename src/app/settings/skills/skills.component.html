@@ -10,6 +10,7 @@
       <div class="col-12">
         <label>Description</label>
         <app-textarea
+          [placeholder]="'Description'"
           [control]="$any(skillsForm.get('description'))"
           [errors]="[{ name: 'required', message: 'Description is required.' }]"
         />

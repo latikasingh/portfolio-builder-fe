@@ -23,6 +23,7 @@
         <div class="col-6">
           <label class="form-label fw-medium" for="">About description</label>
           <app-textarea
+            [placeholder]="'Description'"
             [errors]="[
               { name: 'required', message: 'Description is required' },
             ]"
@@ -35,6 +36,7 @@
             >Designation description</label
           >
           <app-textarea
+            [placeholder]="'Description'"
             [errors]="[
               {
                 name: 'required',

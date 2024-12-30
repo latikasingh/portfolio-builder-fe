@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextareaComponent } from '../formcomponents/textarea/textarea.component';
 import { DatepickerComponent } from '../formcomponents/datepicker/datepicker.component';
 import { RadioComponent } from '../formcomponents/radio/radio.component';
+import { ModalComponent } from '../formcomponents/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { RadioComponent } from '../formcomponents/radio/radio.component';
     TextareaComponent,
     DatepickerComponent,
     RadioComponent,
+    ModalComponent,
   ],
   exports: [RouterModule],
 })

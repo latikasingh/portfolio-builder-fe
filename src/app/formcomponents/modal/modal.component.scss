@@ -1,0 +1,61 @@
+/* custom-dialog.component.scss */
+.custom-dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent backdrop */
+  z-index: 999;
+}
+
+.custom-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  max-width: 80%;
+  z-index: 1000;
+}
+
+.custom-dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.custom-dialog-content {
+  min-height: 400px;
+  max-height: 600px;
+  overflow: auto;
+}
+
+.custom-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}

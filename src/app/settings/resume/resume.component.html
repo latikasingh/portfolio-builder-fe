@@ -1,1 +1,164 @@
-<p>resume works!</p>
+<app-modal (closeModal)="onModalClose($event)" [isOpen]="isModalOpen">
+  <div header class="fs-4 text-start w-100 mx-3">
+    {{ editMode ? 'Update' : 'Add' }} resume
+  </div>
+  <div body class="resume-form-wrap mx-3" [formGroup]="resumeForm">
+    <div class="row mt-2">
+      <div class="col-6">
+        <div class="control-wrap text-start">
+          <label for="">Title</label>
+          <app-input
+            [placeholder]="'Title'"
+            [control]="$any(resumeForm.get('title'))"
+          />
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="control-wrap text-start">
+          <label for="">Subtitle</label>
+          <app-input
+            [placeholder]="'Subtitle'"
+            [control]="$any(resumeForm.get('subtitle'))"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
+        <label for="">Description</label>
+        <app-textarea
+          [placeholder]="'Description'"
+          [control]="$any(resumeForm.get('description'))"
+        />
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-6">
+        <label for="">Start year</label>
+        <app-input
+          [placeholder]="'Start Year'"
+          [control]="$any(resumeForm.get('startYear'))"
+        />
+      </div>
+      <div class="col-6">
+        <label for="">End year</label>
+        <app-input
+          [placeholder]="'End Year'"
+          [control]="$any(resumeForm.get('endYear'))"
+        />
+      </div>
+    </div>
+
+    @if (pointsArray.controls.length > 0) {
+      <div class="row">
+        <label>Points</label>
+        @for (control of pointsArray.controls; track $index) {
+          <div class="col-11">
+            <app-input [placeholder]="'Enter data'" [control]="$any(control)" />
+          </div>
+          <div class="col-1 d-flex align-items-center icon-wrap">
+            <div class="icon" (click)="removePoint($index)">
+              <app-icons
+                width="22px"
+                height="22px"
+                color="red"
+                iconName="bin"
+              />
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-outline-success" (click)="addPoint()">
+          Add Point
+        </button>
+      </div>
+    </div>
+  </div>
+  <div actions>
+    <button
+      [disabled]="resumeForm.invalid || !resumeForm.dirty"
+      (click)="onClickSubmit()"
+      class="btn btn-dark px-4"
+    >
+      @if (loading$ | async) {
+        <app-spinner [classList]="'spinner-border-sm'" />
+      }
+      {{ editMode ? 'Update' : 'Add' }}
+    </button>
+  </div>
+</app-modal>
+@if (loading$ | async) {
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <app-spinner />
+  </div>
+} @else {
+  <div class="content">
+    <h3>Resume</h3>
+
+    <div class="details wrapper">
+      <div class="row my-3">
+        <div class="col-2">
+          <button class="btn btn-dark" (click)="openModal()">
+            <app-icons iconName="plus" color="#ffffff" /> Create new
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        @for (data of resumeData$ | async; track $index) {
+          <div class="col-3 p-2 position-relative del-icon">
+            <div class="position-absolute p-2 top-0 end-0 cursor-pointer">
+              <div class="d-flex gap-2 mt-1 mx-2">
+                <div class="" (click)="editCard(data.id)">
+                  <app-icons
+                    [iconName]="'edit'"
+                    width="18px"
+                    height="18px"
+                    color="green"
+                  />
+                </div>
+                <div class="" (click)="deleteCard(data.id)">
+                  @if ((deleteLoader$ | async) && selectedId === data.id) {
+                    <app-spinner
+                      [classList]="'spinner-border-sm text-danger'"
+                    />
+                  } @else {
+                    <app-icons
+                      [iconName]="'bin'"
+                      width="18px"
+                      height="18px"
+                      color="red"
+                    />
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="custom-card" (click)="onCardClick()">
+              <div class="card-body">
+                <h5 class="card-title">{{ data.title | titlecase }}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                  {{ data.subtitle | titlecase }}
+                  @if (data.startYear) {
+                    <div class="fs-6 py-1">
+                      {{ data.startYear }} -
+                      {{ data.endYear === '' ? 'Present' : data.endYear }}
+                    </div>
+                  }
+                </h6>
+                <p class="card-text">
+                  {{ data.description | titlecase }}
+                </p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
