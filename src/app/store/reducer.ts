@@ -5,15 +5,18 @@ import {
   websiteUserReducer,
 } from './website/user/user.reducer';
 import { aboutUserReducer, IAboutUserState } from './about/about.reducer';
+import { ISkillsState, skillsReducer } from './skills/skills.reducer';
 
 export interface AppState {
   auth: IAuthState;
   websiteUser: IWebsiteUserState;
   about: IAboutUserState;
+  skills: ISkillsState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   websiteUser: websiteUserReducer,
   about: aboutUserReducer,
+  skills: skillsReducer,
 };

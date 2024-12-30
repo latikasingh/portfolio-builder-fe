@@ -3,38 +3,60 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { AlertService } from '../../services/alert.service';
+import { SkillsService } from '../../services/skills.service';
 import {
-  getAboutData,
-  getAboutDataError,
-  getAboutDataSuccess,
-  postAboutData,
-  postAboutDataError,
-  postAboutDataSuccess,
-  updateAboutData,
-  updateAboutDataError,
-  updateAboutDataSuccess,
-} from './about.action';
-import { AboutService } from '../../services/about.service';
+  getSkillData,
+  getSkillDataError,
+  getSkillDataSuccess,
+  postSkillData,
+  postSkillDataError,
+  postSkillDataSuccess,
+  updateSkillData,
+  updateSkillDataError,
+  updateSkillDataSuccess,
+} from './skills.action';
 
 @Injectable()
-export class AboutUserEffects {
+export class SkillsEffects {
   private actions$ = inject(Actions);
   private alertService = inject(AlertService);
-  private aboutService = inject(AboutService);
+  private skillsService = inject(SkillsService);
 
-  getAboutData$ = createEffect(() =>
+  postSkillData$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getAboutData),
+      ofType(postSkillData),
+      exhaustMap((props) =>
+        this.skillsService.addSkills(props.payload).pipe(
+          map((response) => {
+            return postSkillDataSuccess({ data: response });
+          }),
+          catchError((error) => {
+            this.alertService.displayErrorToasts(error.error.message);
+
+            return of(
+              postSkillDataError({
+                error: { message: error.message, statusCode: error.status },
+              }),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
+  getSkillData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getSkillData),
       exhaustMap(() =>
-        this.aboutService.getAboutData().pipe(
+        this.skillsService.getSkills().pipe(
           map((response) => {
-            return getAboutDataSuccess({ data: response });
+            return getSkillDataSuccess({ data: response });
           }),
           catchError((error) => {
             this.alertService.displayErrorToasts(error.error.message);
 
             return of(
-              getAboutDataError({
+              getSkillDataError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );
@@ -44,44 +66,19 @@ export class AboutUserEffects {
     ),
   );
 
-  postAboutData$ = createEffect(() =>
+  updateSkillData$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(postAboutData),
+      ofType(updateSkillData),
       exhaustMap((props) =>
-        this.aboutService.postAboutData(props.data).pipe(
+        this.skillsService.updateSkills(props.payload, props.id).pipe(
           map((response) => {
-            return postAboutDataSuccess({ data: response });
+            return updateSkillDataSuccess({ data: response });
           }),
           catchError((error) => {
             this.alertService.displayErrorToasts(error.error.message);
 
             return of(
-              postAboutDataError({
-                error: { message: error.message, statusCode: error.status },
-              }),
-            );
-          }),
-        ),
-      ),
-    ),
-  );
-
-  updateAboutData$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(updateAboutData),
-      exhaustMap((props) =>
-        this.aboutService.updateAboutData(props.data, props.id).pipe(
-          map((response) => {
-            this.alertService.displaySuccessToasts(
-              'About data updated successfully.',
-            );
-            return updateAboutDataSuccess({ data: response });
-          }),
-          catchError((error) => {
-            this.alertService.displayErrorToasts(error.error.message);
-
-            return of(
-              updateAboutDataError({
+              updateSkillDataError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );

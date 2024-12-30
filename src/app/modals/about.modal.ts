@@ -18,4 +18,5 @@ export interface IAbout {
 
 export interface IAboutDto extends IAbout {
   user: string;
+  id: string;
 }

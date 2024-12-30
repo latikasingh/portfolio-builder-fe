@@ -1,1 +1,84 @@
-<p>skills works!</p>
+@if ((loading$ | async) && !editMode) {
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <app-spinner />
+  </div>
+} @else {
+  <div class="content">
+    <h3>Skills Data</h3>
+
+    <div [formGroup]="skillsForm" class="skill-form-wrap row">
+      <div class="col-12">
+        <label>Description</label>
+        <app-textarea
+          [control]="$any(skillsForm.get('description'))"
+          [errors]="[{ name: 'required', message: 'Description is required.' }]"
+        />
+      </div>
+      @for (skills of skillsArray.controls; track $index) {
+        <div class="form-control-wrap">
+          <div class="row">
+            <div class="col-3">
+              <app-input
+                [placeholder]="'Skill'"
+                [control]="$any(skills.get('name'))"
+                [errors]="[{ name: 'required', message: 'Skill is required.' }]"
+              />
+            </div>
+            <div class="col-3">
+              <app-input
+                [placeholder]="'Percentage'"
+                type="number"
+                [control]="$any(skills.get('percentage'))"
+                [errors]="[
+                  { name: 'required', message: 'Percentage is required.' },
+                  {
+                    name: 'pattern',
+                    message: 'Must be a valid percentage between 1 to 100',
+                  },
+                ]"
+              />
+            </div>
+            @if ((skillsArray ?? []).length > 2) {
+              <div class="col-2 d-flex align-items-center">
+                <button
+                  class="btn btn-outline-danger bin-btn"
+                  (click)="removeControl($index)"
+                >
+                  <app-icons
+                    [iconName]="'bin'"
+                    [color]="'red'"
+                    height="18px"
+                    width="18px"
+                  />
+                </button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="col-1 mt-2">
+        <button
+          class="btn btn-outline-success w-100 rounded-pill"
+          (click)="addSkillField()"
+        >
+          Add Skill
+        </button>
+      </div>
+    </div>
+    <div class="d-flex flex-row my-4">
+      <div>
+        <button
+          [disabled]="skillsForm.invalid || !skillsForm.dirty"
+          class="btn btn-dark px-4"
+          (click)="onSubmit()"
+        >
+          @if ((loading$ | async) && editMode) {
+            <app-spinner [classList]="'spinner-border-sm'" />
+          }
+          {{ editMode ? 'Update' : 'Submit' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

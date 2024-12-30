@@ -1,4 +1,4 @@
-@if (loading$ | async) {
+@if ((loading$ | async) && !editMode) {
   <div class="d-flex align-items-center justify-content-center h-100">
     <app-spinner />
   </div>
@@ -164,9 +164,12 @@
         <button
           class="btn btn-dark px-5"
           (click)="onSubmit()"
-          [disabled]="aboutForm.invalid"
+          [disabled]="aboutForm.invalid || !aboutForm.dirty"
         >
-          Submit
+          @if ((loading$ | async) && editMode) {
+            <app-spinner [classList]="'spinner-border-sm'" />
+          }
+          {{ editMode ? 'Update' : 'Submit' }}
         </button>
       </div>
     </div>
