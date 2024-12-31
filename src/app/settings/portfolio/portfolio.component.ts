@@ -1,6 +1,23 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 import { linkRegex } from '../../regex';
+import { Store } from '@ngrx/store';
+import {
+  addPortfolioData,
+  getPortfolioData,
+} from '../../store/portfolio/portfolio.action';
+import { Observable } from 'rxjs';
+import { IPortfolioDto } from '../../modals/portfolio.modal';
+import {
+  selectPortfolioData,
+  selectPortfolioLoading,
+} from '../../store/portfolio/portfolio.selector';
 
 @Component({
   selector: 'app-portfolio',
@@ -11,6 +28,8 @@ export class PortfolioComponent implements OnInit {
   @ViewChild('fileInput', { static: false })
   inputRef: ElementRef<HTMLInputElement>;
   files: { file: File; previewUrl: string | ArrayBuffer | null }[] = [];
+  loading$: Observable<boolean>;
+  portfolioData$: Observable<IPortfolioDto[]>;
 
   multiple: boolean = true;
   options: { value: string; label: string }[] = [
@@ -21,9 +40,17 @@ export class PortfolioComponent implements OnInit {
 
   portfolioForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+  ) {}
 
   ngOnInit(): void {
+    this.portfolioData$ = this.store.select(selectPortfolioData);
+    this.loading$ = this.store.select(selectPortfolioLoading);
+
+    this.store.dispatch(getPortfolioData());
+
     this.portfolioForm = this.fb.group({
       type: ['', Validators.required],
       name: ['', Validators.required],
@@ -44,17 +71,6 @@ export class PortfolioComponent implements OnInit {
   addFiles(files: File[] | FileList) {
     const formArray = this.portfolioForm.get('projectImages') as FormArray;
     const fileArray = Array.isArray(files) ? files : Array.from(files);
-    console.log(this.files);
-
-    fileArray.forEach((file) => {
-      formArray.push(
-        this.fb.group({
-          file: [file, Validators.required],
-          fileName: [file.name, Validators.required],
-          fileSize: [file.size, Validators.required],
-        }),
-      );
-    });
 
     fileArray.forEach((file) => {
       const reader = new FileReader();
@@ -66,6 +82,7 @@ export class PortfolioComponent implements OnInit {
       } else {
         this.files.push({ file, previewUrl: null });
       }
+      formArray.push(new FormControl(file, Validators.required));
     });
   }
 
@@ -76,6 +93,9 @@ export class PortfolioComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.portfolioForm.value);
+    const payload = this.portfolioForm.value;
+    console.log(payload);
+
+    this.store.dispatch(addPortfolioData({ payload }));
   }
 }

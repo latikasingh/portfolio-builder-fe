@@ -28,6 +28,9 @@ export class SkillsEffects {
       exhaustMap((props) =>
         this.skillsService.addSkills(props.payload).pipe(
           map((response) => {
+            this.alertService.displaySuccessToasts(
+              'Skills added successfully.',
+            );
             return postSkillDataSuccess({ data: response });
           }),
           catchError((error) => {
@@ -72,6 +75,9 @@ export class SkillsEffects {
       exhaustMap((props) =>
         this.skillsService.updateSkills(props.payload, props.id).pipe(
           map((response) => {
+            this.alertService.displaySuccessToasts(
+              'Skills updated successfully.',
+            );
             return updateSkillDataSuccess({ data: response });
           }),
           catchError((error) => {

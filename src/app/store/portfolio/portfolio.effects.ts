@@ -3,38 +3,38 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { AlertService } from '../../services/alert.service';
-import { SkillsService } from '../../services/skills.service';
+import { PortfolioService } from '../../services/portfolio.service';
 import {
-  getSkillData,
-  getSkillDataError,
-  getSkillDataSuccess,
-  postSkillData,
-  postSkillDataError,
-  postSkillDataSuccess,
-  updateSkillData,
-  updateSkillDataError,
-  updateSkillDataSuccess,
+  addPortfolioData,
+  addPortfolioDataError,
+  addPortfolioDataSuccess,
+  getPortfolioData,
+  getPortfolioDataError,
+  getPortfolioDataSuccess,
 } from './portfolio.action';
 
 @Injectable()
-export class SkillsEffects {
+export class PortfolioEffects {
   private actions$ = inject(Actions);
   private alertService = inject(AlertService);
-  private skillsService = inject(SkillsService);
+  private portfolioService = inject(PortfolioService);
 
-  postSkillData$ = createEffect(() =>
+  addPortfolioData$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(postSkillData),
+      ofType(addPortfolioData),
       exhaustMap((props) =>
-        this.skillsService.addSkills(props.payload).pipe(
+        this.portfolioService.addPortfolio(props.payload).pipe(
           map((response) => {
-            return postSkillDataSuccess({ data: response });
+            this.alertService.displaySuccessToasts(
+              'Portfolio data added successfully.',
+            );
+            return addPortfolioDataSuccess({ data: response });
           }),
           catchError((error) => {
             this.alertService.displayErrorToasts(error.error.message);
 
             return of(
-              postSkillDataError({
+              addPortfolioDataError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );
@@ -44,41 +44,19 @@ export class SkillsEffects {
     ),
   );
 
-  getSkillData$ = createEffect(() =>
+  getPortfolioData$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getSkillData),
+      ofType(getPortfolioData),
       exhaustMap(() =>
-        this.skillsService.getSkills().pipe(
+        this.portfolioService.getPortfolio().pipe(
           map((response) => {
-            return getSkillDataSuccess({ data: response });
+            return getPortfolioDataSuccess({ data: response });
           }),
           catchError((error) => {
             this.alertService.displayErrorToasts(error.error.message);
 
             return of(
-              getSkillDataError({
-                error: { message: error.message, statusCode: error.status },
-              }),
-            );
-          }),
-        ),
-      ),
-    ),
-  );
-
-  updateSkillData$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(updateSkillData),
-      exhaustMap((props) =>
-        this.skillsService.updateSkills(props.payload, props.id).pipe(
-          map((response) => {
-            return updateSkillDataSuccess({ data: response });
-          }),
-          catchError((error) => {
-            this.alertService.displayErrorToasts(error.error.message);
-
-            return of(
-              updateSkillDataError({
+              getPortfolioDataError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );

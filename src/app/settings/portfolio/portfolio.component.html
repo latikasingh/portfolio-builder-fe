@@ -7,6 +7,7 @@
       <app-select
         [options]="options"
         [control]="$any(portfolioForm.get('type'))"
+        [errors]="[{ name: 'required', message: 'Type is required' }]"
       />
     </div>
 
@@ -15,6 +16,7 @@
       <app-input
         [placeholder]="'Name'"
         [control]="$any(portfolioForm.get('name'))"
+        [errors]="[{ name: 'required', message: 'Name is required' }]"
       />
     </div>
 
@@ -23,6 +25,9 @@
       <app-input
         [placeholder]="'Description title'"
         [control]="$any(portfolioForm.get('descriptionTitle'))"
+        [errors]="[
+          { name: 'required', message: 'Description title is required' },
+        ]"
       />
     </div>
   </div>
@@ -31,7 +36,8 @@
     <label class="form-label" for="">Description</label>
     <app-textarea
       [placeholder]="'Description'"
-      [control]="$any(portfolioForm.get('type'))"
+      [control]="$any(portfolioForm.get('description'))"
+      [errors]="[{ name: 'required', message: 'Description is required' }]"
     ></app-textarea>
   </div>
 
@@ -75,11 +81,24 @@
     <app-input
       [placeholder]="'Link'"
       [control]="$any(portfolioForm.get('link'))"
+      [errors]="[
+        {
+          name: 'required',
+          message: 'Link is required',
+        },
+        { name: 'pattern', message: 'Please give a valid link' },
+      ]"
     />
   </div>
   <div class="mt-2">
-    <button class="btn btn-dark" (click)="onSubmit()">
-      <!-- [disabled]="portfolioForm.invalid || !portfolioForm.dirty" -->
+    <button
+      class="btn btn-dark"
+      (click)="onSubmit()"
+      [disabled]="portfolioForm.invalid || !portfolioForm.dirty"
+    >
+      @if (loading$ | async) {
+        <app-spinner />
+      }
       Add details
     </button>
   </div>
