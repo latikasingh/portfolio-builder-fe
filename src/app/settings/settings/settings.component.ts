@@ -36,6 +36,8 @@ export class SettingsComponent implements OnInit {
   }
 
   previewWebsite() {
+    console.log(environment.APP_URL);
+
     window.open(`${environment.APP_URL}/portfolio/${this.userId}`, '_blank');
   }
 }
