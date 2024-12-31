@@ -9,14 +9,18 @@
 
 .custom-card {
   min-height: 130px;
-  max-height: 130px;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px 15px;
+  height: 100%;
   &:hover {
     cursor: pointer;
     background-color: rgba(204, 204, 204, 0.2);
     box-shadow: 1px 5px 16px 8px rgba(204, 204, 204, 0.1);
+  }
+
+  .card-text {
+    font-size: 15px;
   }
 }
 .del-icon {

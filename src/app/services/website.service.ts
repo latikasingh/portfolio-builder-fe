@@ -16,4 +16,8 @@ export class WebsiteService {
   getUserAboutData(id: string) {
     return this.http.get<IAboutDto>(`/user-about/${id}`);
   }
+
+  getUserPortfolioData(id: string) {
+    return this.http.get<any>(`/portfolio/${id}`);
+  }
 }

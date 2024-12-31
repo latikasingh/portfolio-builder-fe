@@ -14,6 +14,7 @@ import { IconsComponent } from '../common/icons/icons.component';
 import { RouterModule } from '@angular/router';
 import { CountUpDirective } from '../directives/count.directive';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SanitizeSvgPipe } from '../pipes/sanitize.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SpinnerComponent,
     IconsComponent,
     RouterModule,
+    SanitizeSvgPipe,
     ReactiveFormsModule,
   ],
   exports: [

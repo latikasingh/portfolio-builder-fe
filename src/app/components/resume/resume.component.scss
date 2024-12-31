@@ -7,6 +7,10 @@
     margin-bottom: 20px;
   }
 
+  .section-title {
+    padding-bottom: unset !important;
+  }
+
   .resume-item {
     padding: 0 0 20px 20px;
     margin-top: -2px;
@@ -53,5 +57,9 @@
       background: var(--background-color);
       border: 2px solid var(--accent-color);
     }
+  }
+
+  .no-margin {
+    margin-bottom: unset !important;
   }
 }

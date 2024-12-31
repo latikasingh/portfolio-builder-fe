@@ -7,6 +7,7 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
 import { MainModule } from '../components/main.module';
 import { ActivatedRoute } from '@angular/router';
 import {
+  getUserPortfolioData,
   getWebsiteAboutData,
   getWebsiteUserData,
   setUserId,
@@ -36,8 +37,9 @@ export class MainComponent implements OnInit {
 
     this.userLoading$ = this.store.select(selectAuthUserLoading);
     this.websiteLoading$ = this.store.select(selectWebsiteLoading);
-    this.store.dispatch(getWebsiteUserData({ id: this.userId }));
-    this.store.dispatch(getWebsiteAboutData({ id: this.userId }));
+    // this.store.dispatch(getWebsiteUserData({ id: this.userId }));
+    // this.store.dispatch(getWebsiteAboutData({ id: this.userId }));
+    this.store.dispatch(getUserPortfolioData({ id: this.userId }));
   }
 
   scrollToSection(sectionId: string): void {

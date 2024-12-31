@@ -3,7 +3,13 @@
     position: relative;
 
     .icon {
-      background: var(--accent-color);
+      &::ng-deep {
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+
       display: flex;
       align-items: center;
       justify-content: center;

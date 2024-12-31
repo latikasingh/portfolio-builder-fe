@@ -4,6 +4,9 @@ import { of } from 'rxjs';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { AlertService } from '../../../services/alert.service';
 import {
+  getUserDataPortfolioError,
+  getUserPortfolioData,
+  getUserPortfolioDataSuccess,
   getWebsiteAboutData,
   getWebsiteAboutDataError,
   getWebsiteAboutDataSuccess,
@@ -54,6 +57,28 @@ export class WebsiteUserEffects {
 
             return of(
               getWebsiteAboutDataError({
+                error: { message: error.message, statusCode: error.status },
+              }),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
+  getUserPortfolioData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getUserPortfolioData),
+      exhaustMap((props) =>
+        this.websiteService.getUserPortfolioData(props.id).pipe(
+          map((response) => {
+            return getUserPortfolioDataSuccess({ data: response.data });
+          }),
+          catchError((error) => {
+            this.alertService.displayErrorToasts(error.error.message);
+
+            return of(
+              getUserDataPortfolioError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );

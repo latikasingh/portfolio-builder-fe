@@ -48,6 +48,8 @@
 
     img {
       transition: 0.3s;
+      height: 100% !important;
+      object-fit: cover;
     }
 
     .portfolio-info {
@@ -111,5 +113,8 @@
         transform: scale(1.1);
       }
     }
+  }
+  .section-title {
+    padding-bottom: unset !important;
   }
 }
