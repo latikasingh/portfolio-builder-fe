@@ -7,9 +7,26 @@ import { jsonToFormData } from '../utls';
 export class PortfolioService {
   constructor(private http: HttpClient) {}
 
-  addPortfolio(payload: IPortfolio) {
+  addPortfolio(payload: IPortfolio, images: any) {
     const formData = jsonToFormData(payload);
+
+    (images ?? []).forEach((file: any) => {
+      formData.append('projectImages', file);
+    });
     return this.http.post<IPortfolioDto>('/user-project', formData);
+  }
+
+  updatePortfolio(payload: IPortfolio, images: any, id: string) {
+    const formData = jsonToFormData(payload);
+
+    (images ?? []).forEach((file: any) => {
+      formData.append('projectImages', file);
+    });
+    return this.http.patch<IPortfolioDto>(`/user-project/${id}`, formData);
+  }
+
+  deletePortfolio(id: string) {
+    return this.http.delete(`/user-project/${id}`);
   }
 
   getPortfolio() {

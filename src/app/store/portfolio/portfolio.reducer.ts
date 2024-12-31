@@ -5,14 +5,20 @@ import {
   addPortfolioData,
   addPortfolioDataError,
   addPortfolioDataSuccess,
+  deletePortfolioData,
+  deletePortfolioDataSuccess,
   getPortfolioData,
   getPortfolioDataError,
   getPortfolioDataSuccess,
+  updatePortfolioData,
+  updatePortfolioDataError,
+  updatePortfolioDataSuccess,
 } from './portfolio.action';
 import { IPortfolioDto } from '../../modals/portfolio.modal';
 
 export interface IPortfolioState {
   getLoading: boolean;
+  deleteLoading: boolean;
   loading: boolean;
   portfolio: IPortfolioDto[];
   error: IError;
@@ -20,6 +26,7 @@ export interface IPortfolioState {
 
 export const initialState: IPortfolioState = {
   getLoading: false,
+  deleteLoading: false,
   loading: false,
   portfolio: [],
   error: null,
@@ -38,6 +45,34 @@ export const portfolioReducer = createReducer(
   on(addPortfolioDataError, (state, { error }) => ({
     ...state,
     loading: false,
+    error,
+  })),
+
+  // Update portfolio data
+  on(updatePortfolioData, (state) => ({ ...state, loading: true })),
+  on(updatePortfolioDataSuccess, (state, { data }) => ({
+    ...state,
+    loading: false,
+    portfolio: [...state.portfolio].map((portfolio) =>
+      portfolio.id === data.id ? data : portfolio,
+    ),
+  })),
+  on(updatePortfolioDataError, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  // Delete portfolio data
+  on(deletePortfolioData, (state) => ({ ...state, deleteLoading: true })),
+  on(deletePortfolioDataSuccess, (state, { id }) => ({
+    ...state,
+    deleteLoading: false,
+    portfolio: [...state.portfolio].filter((portfolio) => portfolio.id !== id),
+  })),
+  on(updatePortfolioDataError, (state, { error }) => ({
+    ...state,
+    deleteLoading: false,
     error,
   })),
 

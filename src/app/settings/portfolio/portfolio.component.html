@@ -1,105 +1,194 @@
-<div class="content" [formGroup]="portfolioForm">
-  <div class="fs-4">Portfolio details</div>
-
-  <div class="row mt-2">
-    <div class="col-4">
-      <label class="form-label" for="">Select type</label>
-      <app-select
-        [options]="options"
-        [control]="$any(portfolioForm.get('type'))"
-        [errors]="[{ name: 'required', message: 'Type is required' }]"
-      />
-    </div>
-
-    <div class="col-4">
-      <label class="form-label" for="">Name</label>
-      <app-input
-        [placeholder]="'Name'"
-        [control]="$any(portfolioForm.get('name'))"
-        [errors]="[{ name: 'required', message: 'Name is required' }]"
-      />
-    </div>
-
-    <div class="col-4">
-      <label class="form-label" for="">Description title</label>
-      <app-input
-        [placeholder]="'Description title'"
-        [control]="$any(portfolioForm.get('descriptionTitle'))"
-        [errors]="[
-          { name: 'required', message: 'Description title is required' },
-        ]"
-      />
-    </div>
+@if (getLoading$ | async) {
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <app-spinner />
   </div>
+} @else {
+  @if (addPortfolioData) {
+    <div class="content" [formGroup]="portfolioForm">
+      <div class="fs-4">
+        {{ isEditMode ? 'Update' : 'Add' }} portfolio details
+      </div>
 
-  <div class="row mt-2">
-    <label class="form-label" for="">Description</label>
-    <app-textarea
-      [placeholder]="'Description'"
-      [control]="$any(portfolioForm.get('description'))"
-      [errors]="[{ name: 'required', message: 'Description is required' }]"
-    ></app-textarea>
-  </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label class="form-label" for="">Select type</label>
+          <app-select
+            [options]="options"
+            [control]="$any(portfolioForm.get('type'))"
+            [errors]="[{ name: 'required', message: 'Type is required' }]"
+          />
+        </div>
 
-  <div class="row">
-    <label
-      class="drag-zone"
-      [appDragDrop]="true"
-      (dropped)="handleFileDrop($event)"
-    >
-      <input
-        type="file"
-        [multiple]="true"
-        (change)="addFiles(fileInput.files)"
-        #fileInput
-        class="visually-hidden"
-      />
-      Drag and Drop Files here
-    </label>
-  </div>
+        <div class="col-4">
+          <label class="form-label" for="">Name</label>
+          <app-input
+            [placeholder]="'Name'"
+            [control]="$any(portfolioForm.get('name'))"
+            [errors]="[{ name: 'required', message: 'Name is required' }]"
+          />
+        </div>
 
-  <div class="preview-container">
-    <div *ngFor="let fileData of files; index as i" class="file-preview">
-      <div class="file-info">
-        <img
-          *ngIf="fileData.previewUrl"
-          [src]="fileData.previewUrl"
-          alt="Preview"
-          class="file-thumbnail"
-        />
-        <div class="file-details">
-          <strong>{{ fileData.file.name }}</strong>
-          <span>{{ (fileData.file.size / 1024).toFixed(2) }} KB</span>
+        <div class="col-4">
+          <label class="form-label" for="">Description title</label>
+          <app-input
+            [placeholder]="'Description title'"
+            [control]="$any(portfolioForm.get('descriptionTitle'))"
+            [errors]="[
+              { name: 'required', message: 'Description title is required' },
+            ]"
+          />
         </div>
       </div>
-      <button class="remove-btn" (click)="removeFile(i)">Remove</button>
-    </div>
-  </div>
 
-  <div>
-    <label class="form-label" for="">Link</label>
-    <app-input
-      [placeholder]="'Link'"
-      [control]="$any(portfolioForm.get('link'))"
-      [errors]="[
-        {
-          name: 'required',
-          message: 'Link is required',
-        },
-        { name: 'pattern', message: 'Please give a valid link' },
-      ]"
-    />
-  </div>
-  <div class="mt-2">
-    <button
-      class="btn btn-dark"
-      (click)="onSubmit()"
-      [disabled]="portfolioForm.invalid || !portfolioForm.dirty"
-    >
-      @if (loading$ | async) {
-        <app-spinner />
+      <div class="row mt-2">
+        <label class="form-label" for="">Description</label>
+        <app-textarea
+          [placeholder]="'Description'"
+          [control]="$any(portfolioForm.get('description'))"
+          [errors]="[{ name: 'required', message: 'Description is required' }]"
+        ></app-textarea>
+      </div>
+
+      <div class="row">
+        <label
+          class="drag-zone"
+          [appDragDrop]="true"
+          (dropped)="handleFileDrop($event)"
+        >
+          <input
+            type="file"
+            [multiple]="true"
+            (change)="addFiles(fileInput.files)"
+            #fileInput
+            class="visually-hidden"
+          />
+          Drag and Drop Files here
+        </label>
+      </div>
+
+      <div class="preview-container">
+        <div *ngFor="let fileData of files; index as i" class="file-preview">
+          <div class="file-info">
+            <img
+              *ngIf="fileData?.previewUrl ?? fileData"
+              [src]="fileData?.previewUrl ?? fileData"
+              alt="Preview"
+              class="file-thumbnail"
+            />
+            <div class="file-details">
+              <strong>{{ fileData?.file?.name }}</strong>
+              <span>{{
+                fileData?.file
+                  ? (fileData?.file?.size / 1024).toFixed(2) + ' KB'
+                  : 'Image ' + i
+              }}</span>
+            </div>
+          </div>
+
+          <button class="remove-btn" (click)="removeFile(i)">Remove</button>
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="">Link</label>
+        <app-input
+          [placeholder]="'Link'"
+          [control]="$any(portfolioForm.get('link'))"
+          [errors]="[
+            {
+              name: 'required',
+              message: 'Link is required',
+            },
+            { name: 'pattern', message: 'Please give a valid link' },
+          ]"
+        />
+      </div>
+      <div class="d-flex gap-3 mt-2">
+        <button
+          class="btn btn-dark"
+          (click)="onSubmit()"
+          [disabled]="portfolioForm.invalid || !portfolioForm.dirty"
+        >
+          @if (loading$ | async) {
+            <app-spinner [classList]="'spinner-border-sm'" />
+          }
+          {{ isEditMode ? 'Update' : 'Add' }} details
+        </button>
+        <button class="btn btn-outline-dark" (click)="toggleForm()">
+          Back
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="my-3 d-flex justify-content-between">
+      <h3>PortFolio List</h3>
+      <button
+        class="btn btn-primary d-flex align-items-center gap-2"
+        (click)="toggleForm()"
+      >
+        <app-icons iconName="plus" color="#ffffff" /> Create portfolio
+      </button>
+    </div>
+
+    <div class="row">
+      @for (data of portfolioData$ | async; track $index) {
+        <div class="col-2" style="width: 16rem">
+          <div class="card">
+            <img
+              [src]="data.projectImages[0]"
+              class="card-img-top"
+              alt="coverImage"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ data.name }}</h5>
+              <p class="card-text">
+                <span class="text-primary-emphasis fw-bold">Type:</span>
+                {{ data.type }}
+              </p>
+              <p class="card-text">
+                <span class="text-primary-emphasis fw-bold">Subtype:</span>
+                {{ data.descriptionTitle }}
+              </p>
+              <p class="card-text">
+                {{ data.description }}
+              </p>
+              <a [href]="'https://' + data.link" class="" target="_blank">{{
+                data.link
+              }}</a>
+              <div class="d-flex align-items-center gap-2 mt-2">
+                <div
+                  (click)="editPortfolio(data.id)"
+                  class="icon-wrap cursor-pointer"
+                >
+                  <app-icons
+                    [iconName]="'edit'"
+                    [color]="'var(--bs-warning)'"
+                    width="20px"
+                    height="20px"
+                  />
+                </div>
+                <div
+                  (click)="deletePortfolio(data.id)"
+                  class="icon-wrap cursor-pointer"
+                >
+                  @if ((deleteLoading$ | async) && data.id === portfolioId) {
+                    <app-spinner
+                      [classList]="'spinner-border-sm text-danger'"
+                    />
+                  } @else {
+                    <app-icons
+                      [iconName]="'bin'"
+                      [color]="'var(--bs-danger)'"
+                      width="20px"
+                      height="20px"
+                    />
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       }
-      Add details
-    </button>
-  </div>
-</div>
+    </div>
+  }
+}

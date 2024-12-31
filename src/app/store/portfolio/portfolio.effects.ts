@@ -8,9 +8,15 @@ import {
   addPortfolioData,
   addPortfolioDataError,
   addPortfolioDataSuccess,
+  deletePortfolioData,
+  deletePortfolioDataError,
+  deletePortfolioDataSuccess,
   getPortfolioData,
   getPortfolioDataError,
   getPortfolioDataSuccess,
+  updatePortfolioData,
+  updatePortfolioDataError,
+  updatePortfolioDataSuccess,
 } from './portfolio.action';
 
 @Injectable()
@@ -23,7 +29,7 @@ export class PortfolioEffects {
     this.actions$.pipe(
       ofType(addPortfolioData),
       exhaustMap((props) =>
-        this.portfolioService.addPortfolio(props.payload).pipe(
+        this.portfolioService.addPortfolio(props.payload, props.images).pipe(
           map((response) => {
             this.alertService.displaySuccessToasts(
               'Portfolio data added successfully.',
@@ -35,6 +41,58 @@ export class PortfolioEffects {
 
             return of(
               addPortfolioDataError({
+                error: { message: error.message, statusCode: error.status },
+              }),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
+  updatePortfolioData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updatePortfolioData),
+      exhaustMap((props) =>
+        this.portfolioService
+          .updatePortfolio(props.payload, props.images, props.id)
+          .pipe(
+            map((response) => {
+              this.alertService.displaySuccessToasts(
+                'Portfolio data updated successfully.',
+              );
+              return updatePortfolioDataSuccess({ data: response });
+            }),
+            catchError((error) => {
+              this.alertService.displayErrorToasts(error.error.message);
+
+              return of(
+                updatePortfolioDataError({
+                  error: { message: error.message, statusCode: error.status },
+                }),
+              );
+            }),
+          ),
+      ),
+    ),
+  );
+
+  deletePortfolioData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deletePortfolioData),
+      exhaustMap((props) =>
+        this.portfolioService.deletePortfolio(props.id).pipe(
+          map(() => {
+            this.alertService.displaySuccessToasts(
+              'Portfolio deleted successfully.',
+            );
+            return deletePortfolioDataSuccess({ id: props.id });
+          }),
+          catchError((error) => {
+            this.alertService.displayErrorToasts(error.error.message);
+
+            return of(
+              deletePortfolioDataError({
                 error: { message: error.message, statusCode: error.status },
               }),
             );

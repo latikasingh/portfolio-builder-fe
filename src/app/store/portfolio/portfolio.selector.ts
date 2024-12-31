@@ -14,6 +14,11 @@ export const selectPortfolioGetLoading = createSelector(
   (state: IPortfolioState) => state.getLoading,
 );
 
+export const selectPortfolioDeleteLoading = createSelector(
+  selectPortfolioState,
+  (state: IPortfolioState) => state.deleteLoading,
+);
+
 export const selectPortfolioData = createSelector(
   selectPortfolioState,
   (state: IPortfolioState) => state.portfolio,
