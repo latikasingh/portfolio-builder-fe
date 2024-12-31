@@ -1,1 +1,98 @@
-<p>service works!</p>
+@if ((loading$ | async) && !editMode) {
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <app-spinner />
+  </div>
+} @else {
+  <div class="content">
+    <h3>Services Data</h3>
+
+    <div [formGroup]="servicesForm" class="service-form-wrap row">
+      <div class="col-12">
+        <label>Description</label>
+        <app-textarea
+          [placeholder]="'Description'"
+          [control]="$any(servicesForm.get('description'))"
+          [errors]="[{ name: 'required', message: 'Description is required.' }]"
+        />
+      </div>
+      @for (services of servicesArray.controls; track $index) {
+        <div class="form-control-wrap">
+          <div class="row">
+            <div class="col-3">
+              <app-input
+                [placeholder]="'Title'"
+                [control]="$any(services.get('title'))"
+                [errors]="[
+                  { name: 'required', message: 'Service title is required.' },
+                ]"
+              />
+            </div>
+            <div class="col-3">
+              <app-input
+                [placeholder]="'Description'"
+                [control]="$any(services.get('description'))"
+                [errors]="[
+                  { name: 'required', message: 'Description is required.' },
+                ]"
+              />
+            </div>
+
+            <div class="col-3">
+              <app-autocomplete
+                [selectedIcon]="services.get('svg').value"
+                [isLoading]="
+                  (iconsLoading$ | async) && $index === selectedIndex
+                "
+                [data]="icons$ | async"
+                [placeholder]="'Select Icon'"
+                [control]="$any(services.get('icon'))"
+                [errors]="[{ name: 'required', message: 'Icon is required.' }]"
+                (valueChange)="onIconsChange($event, $index)"
+                (iconChange)="onIconSelect($event, services)"
+              />
+            </div>
+
+            @if ((servicesArray ?? []).length > 2) {
+              <div class="col-2 d-flex align-items-center">
+                <button
+                  class="btn btn-outline-danger bin-btn"
+                  (click)="removeControl($index)"
+                >
+                  <app-icons
+                    [iconName]="'bin'"
+                    [color]="'red'"
+                    height="18px"
+                    width="18px"
+                  />
+                </button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="col-1 col-sm-2 mt-2">
+        <button
+          class="btn btn-outline-success px-3 rounded-pill"
+          (click)="addServiceField()"
+        >
+          Add Service
+        </button>
+      </div>
+    </div>
+    <div class="d-flex flex-row my-4">
+      <div>
+        <button
+          [disabled]="servicesForm.invalid || !servicesForm.dirty"
+          class="btn btn-dark px-4"
+          (click)="onSubmit()"
+        >
+          @if ((loading$ | async) && editMode) {
+            <app-spinner [classList]="'spinner-border-sm'" />
+          }
+          {{ editMode ? 'Update' : 'Submit' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

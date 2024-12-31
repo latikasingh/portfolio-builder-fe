@@ -1,0 +1,49 @@
+<div class="position-relative p-0">
+  @if (isLoading) {
+    <div class="position-absolute top-50 start-100 translate-middle-y loader">
+      <app-spinner [classList]="'spinner-border-sm'" />
+    </div>
+  }
+
+  @if (selectedIcon) {
+    <div class="position-absolute top-50 start-0 translate-middle-y px-3">
+      <span [innerHTML]="getSanitizedIcon(selectedIcon)"></span>
+    </div>
+  }
+
+  <input
+    type="text"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    [matAutocomplete]="auto"
+    (input)="onInputChange($event)"
+  />
+</div>
+
+<mat-autocomplete
+  #auto="matAutocomplete"
+  (optionSelected)="onOptionSelected($event.option.value)"
+>
+  @for (data of filteredData | async; track $index) {
+    <mat-option [value]="data">
+      <div class="d-flex align-items-center justify-content-between gap-3 px-3">
+        @if (data?.icon) {
+          <div [innerHTML]="getSanitizedIcon(data.icon)"></div>
+        }
+        <span>{{ data.value }}</span>
+      </div>
+    </mat-option>
+  }
+</mat-autocomplete>
+
+<div class="text-danger">
+  @for (error of errors; track $index) {
+    <div>
+      @if (control.touched && control.hasError(error.name)) {
+        <div>
+          {{ error.message }}
+        </div>
+      }
+    </div>
+  }
+</div>

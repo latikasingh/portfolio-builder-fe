@@ -11,6 +11,7 @@ import {
   IPortfolioState,
   portfolioReducer,
 } from './portfolio/portfolio.reducer';
+import { IServiceState, serviceReducer } from './service/service.reducer';
 
 export interface AppState {
   auth: IAuthState;
@@ -19,6 +20,7 @@ export interface AppState {
   skills: ISkillsState;
   resume: IResumeState;
   portfolio: IPortfolioState;
+  service: IServiceState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -28,4 +30,5 @@ export const appReducers: ActionReducerMap<AppState> = {
   skills: skillsReducer,
   resume: resumeReducer,
   portfolio: portfolioReducer,
+  service: serviceReducer,
 };

@@ -21,6 +21,7 @@ import { RadioComponent } from '../formcomponents/radio/radio.component';
 import { ModalComponent } from '../formcomponents/modal/modal.component';
 import { SelectComponent } from '../formcomponents/select/select.component';
 import { DragDropDirective } from '../directives/drag-drop.directive';
+import { AutocompleteComponent } from '../formscomponents/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DragDropDirective } from '../directives/drag-drop.directive';
     ModalComponent,
     SelectComponent,
     DragDropDirective,
+    AutocompleteComponent,
   ],
   exports: [RouterModule],
 })

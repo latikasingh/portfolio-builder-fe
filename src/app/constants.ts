@@ -5,5 +5,4 @@ export const menuOptions: { option: string; icon: string }[] = [
   { option: 'resume', icon: 'resume' },
   { option: 'portfolio', icon: 'portfolio' },
   { option: 'services', icon: 'service' },
-  { option: 'contact', icon: 'contact' },
 ];
