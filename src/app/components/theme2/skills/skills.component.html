@@ -15,13 +15,16 @@
               class="progress flex-1"
               role="progressbar"
               aria-label="progress bar"
-              aria-valuenow="75"
+              [attr.ariaValuenow]="skill.percentage"
               aria-valuemin="0"
               aria-valuemax="100"
             >
               <div
-                class="progress-bar progress-bar-striped progress-bar-animated"
-                [style]="{ width: skill.percentage + '%', height: '30px' }"
+                class="progress-bar progress-bar-striped progress-bar-animated bg-dark"
+                [@progressAnimation]="{
+                  value: progressState,
+                  params: { percentage: skill.percentage },
+                }"
               ></div>
             </div>
             <div class="percentage fw-bold">{{ skill.percentage + '%' }}</div>

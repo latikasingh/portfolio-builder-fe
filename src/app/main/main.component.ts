@@ -40,8 +40,6 @@ export class MainComponent implements OnInit {
     this.userLoading$ = this.store.select(selectAuthUserLoading);
     this.websiteLoading$ = this.store.select(selectWebsiteLoading);
     this.theme$ = this.store.select(selectTheme);
-    // this.store.dispatch(getWebsiteUserData({ id: this.userId }));
-    // this.store.dispatch(getWebsiteAboutData({ id: this.userId }));
     this.store.dispatch(getUserPortfolioData({ id: this.userId }));
   }
 

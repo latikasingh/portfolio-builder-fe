@@ -1,0 +1,23 @@
+<div class="portfolio-wrap">
+  <h2 class="header-text text-center">Portfolio</h2>
+  <div class="divider"></div>
+  <div class="cards-wrap">
+    @for (data of projectData$ | async; track $index) {
+      <div class="card p-3">
+        <div class="image-wrap rounded-circle border boredr-1">
+          <img [src]="data.projectImages[0]" class="image" />
+        </div>
+        <div class="pt-2">
+          <div class="title">{{ data.name }}</div>
+          <div class="subtitle">{{ data.descriptionTitle }}</div>
+          <div class="description">{{ data.description }}</div>
+          <div
+            class="link text-primary cursor-pointer text-decoration-underline"
+          >
+            {{ data.link }}
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

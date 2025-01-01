@@ -12,6 +12,11 @@ import { AboutComponent } from './about/about.component';
 import { ResumeComponent } from './resume/resume.component';
 import { ResumeCardComponent } from './resume/resume-card/resume-card.component';
 import { SkillsComponent } from './skills/skills.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ServicesComponent } from './services/services.component';
+import { ContactComponent } from './contact/contact.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,10 @@ import { SkillsComponent } from './skills/skills.component';
     ResumeComponent,
     ResumeCardComponent,
     SkillsComponent,
+    ProjectsComponent,
+    ServicesComponent,
+    ContactComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +39,7 @@ import { SkillsComponent } from './skills/skills.component';
     RouterModule,
     SanitizeSvgPipe,
     ReactiveFormsModule,
+    SlickCarouselModule,
   ],
   exports: [
     HeaderComponent,
@@ -38,6 +48,10 @@ import { SkillsComponent } from './skills/skills.component';
     ResumeComponent,
     ResumeCardComponent,
     SkillsComponent,
+    ProjectsComponent,
+    ServicesComponent,
+    ContactComponent,
+    FooterComponent,
   ],
 })
 export class Theme2Module {}

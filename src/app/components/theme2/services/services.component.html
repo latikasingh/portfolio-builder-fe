@@ -1,0 +1,26 @@
+<div class="content-wrap">
+  <div class="content">
+    <h2 class="text-center">Services</h2>
+    <div class="container">{{ (servicesData$ | async).description }}</div>
+    <div class="divider"></div>
+    <div class="row justify-content-center">
+      @for (service of (servicesData$ | async).services; track $index) {
+        <div class="col-md-3">
+          <div class="card w-75 mb-3">
+            <div class="card-body">
+              <h5 class="card-title">
+                <div class="d-flex align-item-center gap-3">
+                  <span [innerHTML]="service.svg | sanitizeSvg"></span>
+                  {{ service.title | titlecase }}
+                </div>
+              </h5>
+              <p class="card-text">
+                {{ service.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
