@@ -1,0 +1,27 @@
+.main {
+  width: 100%;
+  padding: 20px 5px;
+
+  .content {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .title {
+      text-align: center;
+    }
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+      margin: auto auto;
+    }
+  }
+
+  //   .custom-progress {
+  //     .progress-bar {
+  //       height: 30px;
+  //     }
+  //   }
+}

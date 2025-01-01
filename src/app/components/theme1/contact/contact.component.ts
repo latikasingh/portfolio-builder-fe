@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IAboutDto } from '../../modals/about.modal';
+import { IAboutDto } from '../../../modals/about.modal';
 import {
   selectWebsiteAboutData,
   selectWebsiteUser,
-} from '../../store/website/user/user.selector';
-import { IUser } from '../../modals/user.modal';
+} from '../../../store/website/user/user.selector';
+import { IUser } from '../../../modals/user.modal';
 
 @Component({
   selector: 'app-contact',

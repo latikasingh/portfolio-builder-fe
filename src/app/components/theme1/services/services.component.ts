@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IServiceDto } from '../../modals/service.modal';
+import { IServiceDto } from '../../../modals/service.modal';
 import { Observable } from 'rxjs';
-import { selectWebsiteServiceData } from '../../store/website/user/user.selector';
+import { selectWebsiteServiceData } from '../../../store/website/user/user.selector';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({

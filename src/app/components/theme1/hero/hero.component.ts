@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import Typed from 'typed.js';
-import { IUser } from '../../modals/user.modal';
-import { selectWebsiteUser } from '../../store/website/user/user.selector';
+import { IUser } from '../../../modals/user.modal';
+import { selectWebsiteUser } from '../../../store/website/user/user.selector';
 
 @Component({
   selector: 'app-hero',

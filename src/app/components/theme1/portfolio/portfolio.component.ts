@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IPortfolio } from '../../modals/portfolio.modal';
 import { Store } from '@ngrx/store';
-import { selectWebsitePortfolioData } from '../../store/website/user/user.selector';
+import { IPortfolio } from '../../../modals/portfolio.modal';
+import { selectWebsitePortfolioData } from '../../../store/website/user/user.selector';
 
 @Component({
   selector: 'app-portfolio',

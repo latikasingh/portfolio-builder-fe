@@ -1,0 +1,25 @@
+.card {
+  width: 100%;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+  .title {
+    background-color: rgba(250, 157, 34, 0.4);
+    padding: 10px 15px;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: 500;
+  }
+
+  .body {
+    padding: 5px 15px;
+    .body-title {
+      font-weight: 500;
+    }
+    .helper-text {
+      font-weight: 300;
+    }
+    .description {
+      font-weight: 400;
+    }
+  }
+}

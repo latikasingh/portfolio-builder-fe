@@ -1,0 +1,19 @@
+<div class="content">
+  <div class="resume-wrap">
+    <h2 class="head-text">Resume</h2>
+    <div class="divider"></div>
+    <div class="row justify-content-center">
+      @for (data of resumeData$ | async; track $index) {
+        <div class="col-4">
+          <app-theme2-resume-card
+            [title]="data.title"
+            [bodyTitle]="data.data[0].subtitle"
+            [description]="data.data[0].description"
+            [startYear]="data.data[0].startYear"
+            [endYear]="data.data[0].endYear"
+          />
+        </div>
+      }
+    </div>
+  </div>
+</div>

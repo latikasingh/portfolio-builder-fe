@@ -12,6 +12,7 @@ import {
   portfolioReducer,
 } from './portfolio/portfolio.reducer';
 import { IServiceState, serviceReducer } from './service/service.reducer';
+import { IThemeState, themeReducer } from './theme/theme.reducer';
 
 export interface AppState {
   auth: IAuthState;
@@ -21,6 +22,7 @@ export interface AppState {
   resume: IResumeState;
   portfolio: IPortfolioState;
   service: IServiceState;
+  theme: IThemeState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -31,4 +33,5 @@ export const appReducers: ActionReducerMap<AppState> = {
   resume: resumeReducer,
   portfolio: portfolioReducer,
   service: serviceReducer,
+  theme: themeReducer,
 };

@@ -1,0 +1,68 @@
+<section class="about-section">
+  <div class="container">
+    <div class="row clearfix">
+      <!--Content Column-->
+      <div class="content-column col-md-6 col-sm-12 col-xs-12">
+        <div class="inner-column">
+          <div class="sec-title">
+            <div class="title">About</div>
+            <h2>
+              {{ (aboutData$ | async).designation }}
+            </h2>
+          </div>
+          <div class="text">
+            {{ (aboutData$ | async).description }}
+          </div>
+
+          <div class="text">
+            {{ (aboutData$ | async).designationDescription }}
+          </div>
+          <div class="about">
+            Email:
+            <span class="inner-text">{{ (user$ | async).email }}</span>
+          </div>
+          <div class="about">
+            Website:
+            <span class="inner-text">{{ (aboutData$ | async).website }}</span>
+          </div>
+          <div class="about">
+            Phone:
+            <span class="inner-text">{{ (aboutData$ | async).phone }}</span>
+          </div>
+          <div class="about">
+            Completed Projects:
+            <span class="inner-text">{{ (aboutData$ | async).projects }}</span>
+          </div>
+          <div class="about">
+            Happy clients:
+            <span class="inner-text">{{
+              (aboutData$ | async).happyClient
+            }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!--Image Column-->
+      <div class="image-column col-md-6 col-sm-12 col-xs-12">
+        <div
+          class="inner-column"
+          data-wow-delay="0ms"
+          data-wow-duration="1500ms"
+        >
+          <div class="image">
+            <img
+              class="rounded-top"
+              [src]="(user$ | async).profileImage"
+              alt=""
+            />
+            <div class="bg-dark w-100 d-flex justify-content-around px-3">
+              @for (media of (user$ | async).socialMedia; track $index) {
+                <i [class]="media.icon + ' text-white fs-5 cursor-pointer'"></i>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

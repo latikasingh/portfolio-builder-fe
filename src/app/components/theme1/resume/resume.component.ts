@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IProtfolioResume, IResume } from '../../modals/resume.modal';
-import { selectWebsiteResumeData } from '../../store/website/user/user.selector';
+import { IProtfolioResume, IResume } from '../../../modals/resume.modal';
+import { selectWebsiteResumeData } from '../../../store/website/user/user.selector';
 
 @Component({
   selector: 'app-resume',

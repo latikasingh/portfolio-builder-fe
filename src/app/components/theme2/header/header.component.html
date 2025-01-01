@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0 py-3">
+  <div class="container-xl">
+    <!-- Logo -->
+    <div class="navbar-brand">
+      {{ (user$ | async).firstName + ' ' + (user$ | async).lastName }}
+    </div>
+    <!-- Navbar toggle -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <!-- Nav -->
+      <div class="navbar-nav mx-lg-auto">
+        @for (link of links; track $index) {
+          <div
+            class="nav-item nav-link cursor-pointer"
+            (click)="onSelectSection(link)"
+          >
+            {{ link }}
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</nav>

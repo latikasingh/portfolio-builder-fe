@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="title">{{ title | titlecase }}</div>
+  <div class="body">
+    <div class="body-title">{{ bodyTitle }}</div>
+    @if (startYear) {
+      <div class="helper-text">
+        {{ startYear }} - {{ endYear !== '' ? endYear : 'Present' }}
+      </div>
+    }
+    <div class="description">
+      {{ description }}
+    </div>
+  </div>
+</div>

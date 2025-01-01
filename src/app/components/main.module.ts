@@ -1,54 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { HeroComponent } from './hero/hero.component';
-import { AboutComponent } from './about/about.component';
-import { SkillsComponent } from './skills/skills.component';
-import { ResumeComponent } from './resume/resume.component';
-import { PortfolioComponent } from './portfolio/portfolio.component';
-import { ServicesComponent } from './services/services.component';
-import { ContactComponent } from './contact/contact.component';
-import { FooterComponent } from './footer/footer.component';
-import { SpinnerComponent } from './spinner/spinner.component';
-import { IconsComponent } from '../common/icons/icons.component';
-import { RouterModule } from '@angular/router';
 import { CountUpDirective } from '../directives/count.directive';
-import { ReactiveFormsModule } from '@angular/forms';
-import { SanitizeSvgPipe } from '../pipes/sanitize.pipe';
+
+import { Theme1Module } from './theme1/theme1.module';
+import { Theme2Module } from './theme2/theme2.module';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    HeroComponent,
-    AboutComponent,
-    SkillsComponent,
-    ResumeComponent,
-    PortfolioComponent,
-    ServicesComponent,
-    ContactComponent,
-    FooterComponent,
-    CountUpDirective,
-  ],
-  imports: [
-    CommonModule,
-    SpinnerComponent,
-    IconsComponent,
-    RouterModule,
-    SanitizeSvgPipe,
-    ReactiveFormsModule,
-  ],
-  exports: [
-    HeaderComponent,
-    HeroComponent,
-    AboutComponent,
-    SkillsComponent,
-    ResumeComponent,
-    PortfolioComponent,
-    ServicesComponent,
-    ContactComponent,
-    FooterComponent,
-    SpinnerComponent,
-    CommonModule,
-  ],
+  declarations: [],
+  imports: [CommonModule, Theme1Module, Theme2Module, CountUpDirective],
+  exports: [CommonModule, Theme1Module, Theme2Module],
 })
 export class MainModule {}

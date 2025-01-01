@@ -1,0 +1,18 @@
+<div id="header-theme2" class="hero-wrapper">
+  <img [src]="(user$ | async).coverImage" alt="Hero Background" />
+  <div class="overlay"></div>
+  <div class="hero-text">
+    <h1 class="inner-text">
+      <div class="greeting-text">Hi , i am</div>
+      {{ (user$ | async).firstName + ' ' + (user$ | async).lastName }}
+      <br />
+      <h3 class="text-center text-white">
+        <span class="typed"></span
+        ><span
+          class="typed-cursor typed-cursor-blink"
+          aria-hidden="true"
+        ></span>
+      </h3>
+    </h1>
+  </div>
+</div>

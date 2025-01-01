@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IUser } from '../../modals/user.modal';
+import { IUser } from '../../../modals/user.modal';
 import { Router } from '@angular/router';
-import { selectWebsiteUser } from '../../store/website/user/user.selector';
+import { selectWebsiteUser } from '../../../store/website/user/user.selector';
 
 @Component({
   selector: 'app-header',

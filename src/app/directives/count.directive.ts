@@ -9,6 +9,7 @@ import {
 
 @Directive({
   selector: '[countUp]',
+  standalone: true,
 })
 export class CountUpDirective implements OnChanges {
   @Input('countUp') targetCount: number = 0;
