@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
 import { Observable, take } from 'rxjs';
 import { IUser } from '../../modals/user.modal';
@@ -17,7 +17,6 @@ export class SettingsComponent implements OnInit {
   userId: string;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private store: Store,
   ) {}

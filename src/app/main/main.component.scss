@@ -11,3 +11,10 @@
     flex-direction: column;
   }
 }
+
+.btn-setting {
+  z-index: 999;
+  bottom: 30px;
+  position: sticky !important;
+  left: 96%;
+}

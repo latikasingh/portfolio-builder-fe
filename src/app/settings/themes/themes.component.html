@@ -1,0 +1,36 @@
+<div class="content-wrap">
+  <h3>Select Themes</h3>
+
+  <div class="list-wrap row">
+    @for (theme of themes; track $index) {
+      <div
+        class="item col-md-3 cursor-pointer"
+        (click)="selectTheme(theme.name, theme._id)"
+      >
+        <div
+          class="card"
+          [class.active]="activeTheme === theme.name"
+          style="width: 18rem"
+        >
+          <img [src]="theme.img" class="card-img-top" alt="default image" />
+          <div class="card-body">
+            <h5 class="card-title">{{ theme.name }}</h5>
+            <p class="card-text">
+              {{ theme.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="btn-wrap">
+    <button
+      class="btn btn-primary px-4"
+      [disabled]="disableBtn"
+      (click)="onSave()"
+    >
+      Save
+    </button>
+  </div>
+</div>

@@ -3,7 +3,7 @@
     <app-spinner></app-spinner>
   </div>
 } @else {
-  @if ((theme$ | async) === 'theme1') {
+  @if (activeTheme?.name === 'Default Theme') {
     <div class="main-wrap" [@fadeInOnEnter]>
       <div class="header-wrap">
         <app-header (selectedTabOption)="scrollToSection($event)"></app-header>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <app-footer></app-footer>
-  } @else if ((theme$ | async) === 'theme2') {
+  } @else if (activeTheme?.name === 'Dawn Theme') {
     <app-theme2-header></app-theme2-header>
     <app-theme2-hero></app-theme2-hero>
     <app-theme2-about></app-theme2-about>
@@ -29,5 +29,18 @@
     <app-theme2-services></app-theme2-services>
     <app-theme2-contact></app-theme2-contact>
     <app-theme2-footer></app-theme2-footer>
+
+    @if ((authUser$ | async).id === (websiteUser$ | async).id) {
+      <div class="btn btn-primary btn-setting" (click)="navigateToSettings()">
+        <app-icons
+          [iconName]="'settings'"
+          [color]="'#ffffff'"
+          [width]="'20px'"
+          [height]="'20px'"
+        />
+      </div>
+    }
+  } @else {
+    {{ activeTheme | json }}
   }
 }

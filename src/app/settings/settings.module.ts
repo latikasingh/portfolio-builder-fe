@@ -22,6 +22,7 @@ import { ModalComponent } from '../formcomponents/modal/modal.component';
 import { SelectComponent } from '../formcomponents/select/select.component';
 import { DragDropDirective } from '../directives/drag-drop.directive';
 import { AutocompleteComponent } from '../formcomponents/autocomplete/autocomplete.component';
+import { ThemesComponent } from './themes/themes.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AutocompleteComponent } from '../formcomponents/autocomplete/autocomple
     ResumeComponent,
     ServiceComponent,
     SkillsComponent,
+    ThemesComponent,
   ],
   imports: [
     CommonModule,

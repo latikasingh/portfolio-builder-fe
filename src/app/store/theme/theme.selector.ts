@@ -10,7 +10,12 @@ export const selectThemeLoading = createSelector(
 
 export const selectTheme = createSelector(
   selectThemeState,
-  (state: IThemeState) => state.theme,
+  (state: IThemeState) => state.activeTheme,
+);
+
+export const selectThemeList = createSelector(
+  selectThemeState,
+  (state: IThemeState) => state.themes,
 );
 
 export const selectThemeError = createSelector(

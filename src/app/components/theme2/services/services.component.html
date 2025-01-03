@@ -10,7 +10,9 @@
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex align-item-center gap-3">
-                  <span [innerHTML]="service.svg | sanitizeSvg"></span>
+                  <span
+                    [innerHTML]="service.svg ?? defaultSvg | sanitizeSvg"
+                  ></span>
                   {{ service.title | titlecase }}
                 </div>
               </h5>

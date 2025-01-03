@@ -1,9 +1,6 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { authReducer, IAuthState } from './auth/auth.reducer';
-import {
-  IWebsiteUserState,
-  websiteUserReducer,
-} from './website/user/user.reducer';
+import { IWebsiteState, websiteUserReducer } from './website/user/user.reducer';
 import { aboutUserReducer, IAboutUserState } from './about/about.reducer';
 import { ISkillsState, skillsReducer } from './skills/skills.reducer';
 import { IResumeState, resumeReducer } from './resume/resume.reducer';
@@ -16,7 +13,7 @@ import { IThemeState, themeReducer } from './theme/theme.reducer';
 
 export interface AppState {
   auth: IAuthState;
-  websiteUser: IWebsiteUserState;
+  website: IWebsiteState;
   about: IAboutUserState;
   skills: ISkillsState;
   resume: IResumeState;
@@ -27,7 +24,7 @@ export interface AppState {
 
 export const appReducers: ActionReducerMap<AppState> = {
   auth: authReducer,
-  websiteUser: websiteUserReducer,
+  website: websiteUserReducer,
   about: aboutUserReducer,
   skills: skillsReducer,
   resume: resumeReducer,

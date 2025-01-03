@@ -9,6 +9,7 @@ import { ResumeComponent } from './resume/resume.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
+import { ThemesComponent } from './themes/themes.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'portfolio', component: PortfolioComponent },
       { path: 'skills', component: SkillsComponent },
       { path: 'contact', component: ContactComponent },
+      { path: 'themes', component: ThemesComponent },
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
     ],
   },

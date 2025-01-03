@@ -7,6 +7,7 @@ export interface IUser {
   profileImage: any;
   socialMedia: ISocialMedia[];
   tags: string[];
+  theme: string;
 }
 
 export interface ISocialMedia {

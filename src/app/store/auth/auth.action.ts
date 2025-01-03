@@ -73,3 +73,8 @@ export const updateUserError = createAction(
   '[Auth] UpdateUserError',
   props<{ error: IError }>(),
 );
+
+export const setTheme = createAction(
+  '[Auth] SetTheme',
+  props<{ theme: string }>(),
+);

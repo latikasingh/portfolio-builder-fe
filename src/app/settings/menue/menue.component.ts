@@ -16,7 +16,6 @@ export class MenueComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {}

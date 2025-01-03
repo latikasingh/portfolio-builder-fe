@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { IUser } from '../../../modals/user.modal';
 import { IError } from '../../../modals/error.modal';
 import { IAboutDto } from '../../../modals/about.modal';
-import { IWebsiteUserState } from './user.reducer';
+import { IWebsiteState } from './user.reducer';
 
 //Set Userid
 export const setUserId = createAction(
@@ -50,7 +50,7 @@ export const getUserPortfolioData = createAction(
 
 export const getUserPortfolioDataSuccess = createAction(
   '[Website] getUserPortfolioDataSuccess',
-  props<{ data: IWebsiteUserState }>(),
+  props<{ data: IWebsiteState }>(),
 );
 
 export const getUserDataPortfolioError = createAction(

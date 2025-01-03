@@ -1,43 +1,48 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IWebsiteUserState } from './user.reducer';
+import { IWebsiteState } from './user.reducer';
 
-export const selectWebsiteUserState =
-  createFeatureSelector<IWebsiteUserState>('websiteUser');
+export const selectWebsiteState =
+  createFeatureSelector<IWebsiteState>('website');
 
 export const selectWebsiteLoading = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.loading,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.loading,
 );
 
 export const selectWebsiteUser = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.user,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.user,
 );
 
 export const selectWebsiteError = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.error,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.error,
 );
 
 export const selectWebsiteAboutData = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.about,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.about,
 );
 export const selectWebsiteSkillData = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.skill,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.skill,
 );
 
 export const selectWebsiteResumeData = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.resume,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.resume,
 );
 export const selectWebsitePortfolioData = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.portfolio,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.portfolio,
 );
 
 export const selectWebsiteServiceData = createSelector(
-  selectWebsiteUserState,
-  (state: IWebsiteUserState) => state.service,
+  selectWebsiteState,
+  (state: IWebsiteState) => state.service,
+);
+
+export const selectWebsiteTheme = createSelector(
+  selectWebsiteState,
+  (state: IWebsiteState) => state.theme,
 );

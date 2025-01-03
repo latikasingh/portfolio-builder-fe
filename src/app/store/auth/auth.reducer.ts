@@ -11,6 +11,7 @@ import {
   logout,
   logoutError,
   logoutSuccess,
+  setTheme,
   signup,
   signupError,
   signupSuccess,
@@ -85,5 +86,9 @@ export const authReducer = createReducer(
     ...state,
     updateLoading: false,
     error,
+  })),
+  on(setTheme, (state, { theme }) => ({
+    ...state,
+    user: { ...state.user, theme },
   })),
 );

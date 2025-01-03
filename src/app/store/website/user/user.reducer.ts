@@ -18,8 +18,9 @@ import { ISkill } from '../../../modals/skills.modal';
 import { IProtfolioResume } from '../../../modals/resume.modal';
 import { IPortfolio } from '../../../modals/portfolio.modal';
 import { IServiceDto } from '../../../modals/service.modal';
+import { IThemes } from '../../../modals/themes.modal';
 
-export interface IWebsiteUserState {
+export interface IWebsiteState {
   loading: boolean;
   user: IUser;
   about: IAboutDto;
@@ -27,11 +28,12 @@ export interface IWebsiteUserState {
   resume: IProtfolioResume[];
   portfolio: IPortfolio[];
   service: IServiceDto;
+  theme: IThemes;
   error: IError;
   userId: string;
 }
 
-export const initialState: IWebsiteUserState = {
+export const initialState: IWebsiteState = {
   loading: false,
   user: null,
   about: null,
@@ -40,6 +42,7 @@ export const initialState: IWebsiteUserState = {
   portfolio: [],
   service: null,
   error: null,
+  theme: null,
   userId: null,
 };
 
